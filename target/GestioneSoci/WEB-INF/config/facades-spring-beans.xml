@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="sociFacade"
+		class=" it.cofidimpresa.facades.impl.DefaultSociFacade">
+	</bean>
+
+	<bean id="finanziamentiFacade"
+		class=" it.cofidimpresa.facades.impl.DefaultFinanziamentiFacade">
+	</bean>
+
+	<bean id="statoSocioFacade"
+		class=" it.cofidimpresa.facades.impl.DefaultStatoSocioFacade">
+	</bean>
+
+	<bean id="statoFinanziamentoFacade"
+		class=" it.cofidimpresa.facades.impl.DefaultStatoFinanziamentoFacade">
+	</bean>
+
+	<bean id="qualitaTitolareFacade"
+		class=" it.cofidimpresa.facades.impl.DefaultQualitaTitolareFacade">
+	</bean>
+	<bean id="settoreImpresaFacade"
+		class=" it.cofidimpresa.facades.impl.DefaultSettoreImpresaFacade">
+	</bean>
+	<bean id="tipoSocietaFacade"
+		class=" it.cofidimpresa.facades.impl.DefaultTipoSocietaFacade">
+	</bean>
+	
+	<bean id="atecoFacade"
+		class=" it.cofidimpresa.facades.impl.DefaultAtecoFacade">
+	</bean>
+	
+	<bean id="controgaranziaFacade"
+		class=" it.cofidimpresa.facades.impl.DefaultControgaranziaFacade">
+	</bean>
+	
+	<bean id="bancheFacade"
+		class=" it.cofidimpresa.facades.impl.DefaultBancheFacade">
+	</bean>
+	
+	<bean id="antiriciclaggioFacade"
+		class=" it.cofidimpresa.facades.impl.DefaultAntiriciclaggioFacade">
+	</bean>
+	
+	<bean id="generaFileCrifFacade"
+		class=" it.cofidimpresa.facades.impl.DefaultGeneraFileCrifFacade">
+	</bean>
+	
+</beans>

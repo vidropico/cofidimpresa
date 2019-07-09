@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="userDAO"
+		class=" it.cofidimpresa.dao.impl.DefaultUserDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+
+	<bean id="profiloDAO"
+		class=" it.cofidimpresa.dao.impl.DefaultProfiloDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="sociDAO"
+		class=" it.cofidimpresa.dao.impl.DefaultSociDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="finanziamentiDAO"
+		class=" it.cofidimpresa.dao.impl.DefaultFinanziamentiDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="statoSocioDAO"
+		class=" it.cofidimpresa.dao.impl.DefaultStatoSocioDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="statoFinanziamentoDAO"
+		class=" it.cofidimpresa.dao.impl.DefaultStatoFinanziamentoDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="qualitaTitolareDAO"
+		class=" it.cofidimpresa.dao.impl.DefaultQualitaTitolareDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="settoreImpresaDAO"
+		class=" it.cofidimpresa.dao.impl.DefaultSettoreImpresaDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="tipoSocietaDAO"
+		class=" it.cofidimpresa.dao.impl.DefaultTipoSocietaDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="atecoDAO"
+		class=" it.cofidimpresa.dao.impl.DefaultAtecoDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="controgaranziaDAO"
+		class=" it.cofidimpresa.dao.impl.DefaultControgaranziaDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="bancheDAO"
+		class=" it.cofidimpresa.dao.impl.DefaultBancheDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="antiriciclaggioDAO"
+		class=" it.cofidimpresa.dao.impl.DefaultAntiriciclaggioDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="generaFileCrifDAO"
+		class=" it.cofidimpresa.dao.impl.DefaultGeneraFileCrifDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+</beans>

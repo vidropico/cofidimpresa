@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource ">
+		<property name="basename" value="WEB-INF/classes/messages/messages" />
+		<property name="cacheSeconds" value="0" />
+	</bean>
+	
+	<bean id="defaultJavaUtils"	class="it.cofidimpresa.utils.DefaultJavaUtils "/>
+	
+	<bean id="commonDocument"	class="it.cofidimpresa.documents.CommonDocument"/>
+	
+	<bean id="addebitoBanca"	class="it.cofidimpresa.documents.AddebitoBanca" parent="commonDocument"/>
+	
+	<bean id="domandaBanca"	class="it.cofidimpresa.documents.DomandaBanca" parent="commonDocument"/>
+	
+	<bean id="ricapitolo"	class="it.cofidimpresa.documents.Ricapitolo" parent="commonDocument"/>
+	
+	<bean id="ricapitoloJasper"	class="it.cofidimpresa.documents.RicapitoloJasper" parent="commonDocument"/>
+	
+	<bean id="addebitoJasper"	class="it.cofidimpresa.documents.AddebitoJasper" parent="commonDocument"/>
+	
+	<bean id="domandaBancaJasper"	class="it.cofidimpresa.documents.DomandaJasper" parent="commonDocument"/>
+	
+	
+</beans>

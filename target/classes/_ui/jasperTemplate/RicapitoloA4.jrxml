@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final utlizzo versione della libreria JasperReports6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RicapitoloA4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="06f1d9ac-bc12-4937-9802-ca13a5b9f569">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="data_Delibera" class="java.lang.String"/>
+	<parameter name="azienda" class="java.lang.String"/>
+	<parameter name="parte_uno" class="java.lang.String"/>
+	<parameter name="titolare" class="java.lang.String"/>
+	<parameter name="attivita" class="java.lang.String"/>
+	<parameter name="garanzia" class="java.lang.String"/>
+	<parameter name="sommario_uno" class="java.lang.String"/>
+	<parameter name="sommario_due" class="java.lang.String"/>
+	<parameter name="sommario_tre" class="java.lang.String"/>
+	<parameter name="sommario_quattro" class="java.lang.String"/>
+	<parameter name="parte_finanziaria" class="java.lang.String"/>
+	<parameter name="dati_titolare" class="java.lang.String"/>
+	<parameter name="imageTestata" class="java.lang.String"/>
+	<parameter name="ImagePieDiLista" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<image scaleImage="RealSize" hAlign="Center">
+				<reportElement x="130" y="0" width="300" height="60" uuid="a6c7ea70-bba3-4d00-9c35-38973d0164a6"/>
+				<imageExpression><![CDATA[$P{imageTestata}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="320" y="0" width="90" height="20" uuid="eec40143-76c6-4592-825a-715418fba5c8"/>
+				<textElement>
+					<font fontName="Times New Roman" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement stretchType="RelativeToTallestObject" x="264" y="2" width="229" height="20" uuid="7bc30371-319d-45ce-873d-52c6a60243e9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{data_Delibera}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<textField evaluationTime="Auto">
+				<reportElement x="35" y="4" width="462" height="20" uuid="7e623508-0642-461c-8965-4a2038681282"/>
+				<textElement>
+					<font fontName="Times New Roman" size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{azienda}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="613" splitType="Stretch">
+			<textField>
+				<reportElement x="35" y="7" width="462" height="123" uuid="30a459e9-20c1-42a4-ae7a-1b77209339e0"/>
+				<textElement>
+					<font fontName="Times New Roman" size="15"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{parte_uno}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="35" y="142" width="179" height="20" isRemoveLineWhenBlank="true" uuid="b443eb9b-74ab-4ed6-9f8f-268a2bcf82c9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{titolare}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="34" y="175" width="462" height="91" isRemoveLineWhenBlank="true" uuid="2901f0b6-7898-40fe-aa4d-0dc13bd3bd6f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="15"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dati_titolare}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="34" y="278" width="462" height="20" uuid="c7082521-87af-4524-a38a-1ec5df4b2ebe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{attivita}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="34" y="465" width="462" height="60" uuid="b16dbcac-b6a7-46d3-b9fd-7eef8937fb9b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="15"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{parte_finanziaria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="35" y="299" width="461" height="20" uuid="f66a842f-541d-42a1-9cb8-b33944cd7f52"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{garanzia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="35" y="331" width="461" height="20" uuid="de08dabc-fc26-4ed6-9f0e-4e3db8c74a42"/>
+				<textElement>
+					<font fontName="Times New Roman" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sommario_uno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="35" y="355" width="461" height="20" uuid="2f02b359-92be-4e07-ae8b-fcaf3eb89aa3"/>
+				<textElement>
+					<font fontName="Times New Roman" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sommario_due}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="35" y="380" width="461" height="20" uuid="cd89bccc-558b-49f0-8686-4c2cbfda414f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sommario_tre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="35" y="405" width="461" height="20" uuid="78a44860-5b74-4330-ac39-c786d7a70ab2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sommario_quattro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="293" y="585" width="200" height="20" uuid="509c98bf-534d-4c86-bcce-bc168a2f421c"/>
+				<textElement>
+					<font fontName="Times New Roman" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FRANCESCO D' ARGENZIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="558" width="130" height="20" uuid="108098d2-655d-424c-80de-3acc12ff0ea6"/>
+				<textElement>
+					<font fontName="Times New Roman" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IL DIRETTORE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="35" y="541" width="205" height="20" uuid="80a08b16-cacc-49f9-922a-a20979a8b5a9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="15"/>
+				</textElement>
+				<text><![CDATA[Caserta lì]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="34" y="436" width="462" height="20" uuid="294f8956-d3e2-4e15-a5de-5b8e9eb073cb"/>
+				<textElement>
+					<font fontName="Times New Roman" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PARTE FINANZIARIA]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>
