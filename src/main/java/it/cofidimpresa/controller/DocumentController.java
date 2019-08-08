@@ -155,12 +155,19 @@ public class DocumentController {
 		    {
 		        outputStream.write( buffer, 0, bytesRead );
 		    }
+		    response.getOutputStream().flush();
+		    response.getOutputStream().close();
 		}
 		finally
 		{
 		    if ( null != in )
 		    {
 		        in.close();
+		    }
+		    if ( null != outputStream )
+		    {
+		    	outputStream.flush();
+		    	outputStream.close();
 		    }
 		}
 	}
