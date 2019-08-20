@@ -18,6 +18,9 @@
 		<property name="prefix" value="/WEB-INF/views/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
+	
+	<bean id="sociValidator" class="it.cofidimpresa.validator.SociValidator"/>
+	<bean id="insFinanziamentiValidator" class="it.cofidimpresa.validator.InsFinanziamentiValidator"/>
 
 	<!-- <mvc:resources mapping="/_ui/**" location="/_ui/" /> -->
 	<mvc:resources location="classpath:/_ui/" mapping="/**" />

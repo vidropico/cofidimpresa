@@ -32,31 +32,35 @@ import it.cofidimpresa.facades.ControgaranziaFacade;
 import it.cofidimpresa.facades.FinanziamentiFacade;
 import it.cofidimpresa.facades.SociFacade;
 import it.cofidimpresa.facades.StatoFinanziamentoFacade;
+import it.cofidimpresa.validator.InsFinanziamentiValidator;
 
 @Controller
 public class FinanziamentiController {
 	private static final Logger logger = Logger.getLogger(FinanziamentiController.class);
 
 	@Resource(name="messageSource")
-	ReloadableResourceBundleMessageSource  messageSource;
+	private ReloadableResourceBundleMessageSource  messageSource;
 	
 	@Resource(name = "finanziamentiFacade")
-	FinanziamentiFacade finanziamentiFacade;
+	private FinanziamentiFacade finanziamentiFacade;
 
 	@Resource(name = "controgaranziaFacade")
-	ControgaranziaFacade controgaranziaFacade;
+	private ControgaranziaFacade controgaranziaFacade;
 
 	@Resource(name = "bancheFacade")
-	BancheFacade bancheFacade;
+	private BancheFacade bancheFacade;
 
 	@Resource(name = "statoFinanziamentoFacade")
-	StatoFinanziamentoFacade statoFinanziamentoFacade;
+	private StatoFinanziamentoFacade statoFinanziamentoFacade;
 
 	@Resource(name = "sociFacade")
-	SociFacade sociFacade;
+	private SociFacade sociFacade;
 	
 	@Resource(name = "antiriciclaggioFacade")
-	AntiriciclaggioFacade antiriciclaggioFacade;
+	private AntiriciclaggioFacade antiriciclaggioFacade;
+	
+	@Resource
+	private InsFinanziamentiValidator insFinanziamentiValidator;
 
 	@RequestMapping(value = "/elencoFinanziamenti", method = RequestMethod.GET)
 	public String elencoFinanziamenti(final Model model, final HttpServletRequest request,
@@ -123,6 +127,11 @@ public class FinanziamentiController {
 		logger.debug("*** insertFinanziamento ***");
 		if(StringUtils.isNotEmpty(piva)) {
 			try {
+				insFinanziamentiValidator.validate(finanziamentiData, bindingResult);
+				if(bindingResult.hasErrors()) {
+					model.addAttribute("finanziamentiData", finanziamentiData);
+					return "insFinanziamento";
+				}
 				Integer idSocio = sociFacade.getIdSocioByPIva(piva);
 				finanziamentiData.setIdSoci(idSocio);
 				model.addAttribute("confirmMsg",messageSource.getMessage("insert.finanziamento", null, LocaleContextHolder.getLocale()));

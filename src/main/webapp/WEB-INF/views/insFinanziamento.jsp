@@ -20,195 +20,173 @@
 				id="i2"><span class="nmbr">2</span>Finanziamento Banca</a></li>
 	</div>
 
-	<div class="wrap" style="margin-top: 10px; margin-bottom: 50px;">
+	<div class="col-sm-12" style="margin-top: 10px; margin-bottom: 50px;">
 		<form:form action="inserisciFin" method="POST"
 			class="form-signin" modelAttribute="finanziamentiData">
 			<div id="i9">
-				<input id="idSoci" name="idSoci"
-					value="${finanziamentiData.idSoci}" type="hidden">
+				<form:input path="idSoci"
+					value="${finanziamentiData.idSoci}" type="hidden"/>
+			<div class="row" style="margin-bottom:10px;">		
+				<div class="col-sm-3">
 				<c:choose>
-					<c:when test="${not empty finanziamentiData.idSoci}">
-						<label for="Impresa" style="margin-left: -160px;">Impresa </label> <input
-						id="Impresa" name="Impresa" value="${impresa}" type="text"
-						placeholder="P Iva">
-						<div class="bar">
-							<i></i>
-						</div>
+					<c:when test="${finanziamentiData.idSoci >0}">
+						<label for="Impresa" >Impresa </label><br> 
+						<input id="Impresa" name="Impresa" value="${impresa}" type="text" readonly="readonly"/>
 					</c:when>
 					<c:otherwise>
-						<label for="piva" style="margin-left: -160px;">Impresa (Partita Iva)</label> <input
-						id="piva" name="piva" value="${piva}" type="text"
-						placeholder="P Iva">
-						<div class="bar">
-							<i></i>
-						</div>
+						<label for="piva" class="error">Impresa (Partita Iva)</label><br>
+						<input id="piva" name="piva" value="${piva}" type="text"/>				
 					</c:otherwise>
 				</c:choose>
-				<label for="idStatoFinanziamenti" style="margin-left: -160px;">Stato
-					Finanziamenti </label> <select id="idStatoFinanziamenti"
-					name="idStatoFinanziamenti">
+				</div>
+				<div class="col-sm-3">
+				<label for="idStatoFinanziamenti" >Stato
+					Finanziamenti </label><br> 
+					<form:select path="idStatoFinanziamenti">
 					<c:forEach var="statoFin" items="${statoFinList}">
 						<c:choose>
 							<c:when
 								test="${finanziamentiData.idStatoFinanziamenti eq statoFin.id}">
-								<option value="${statoFin.id}" selected>${statoFin.descrizione}</option>
+								<form:option value="${statoFin.id}" label="${statoFin.descrizione}" selected="true" />
 							</c:when>
 							<c:otherwise>
-								<option value="${statoFin.id}">${statoFin.descrizione}</option>
+								<form:option value="${statoFin.id}" label="${statoFin.descrizione}"/>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-				</select>
-				<div class="bar">
-					<i></i>
+					</form:select>
 				</div>
-				<label for="importoRichiesto" style="margin-left: -160px;">Importo
-					Richiesto:</label> <input id="importoRichiesto" name="importoRichiesto"
-					value="${finanziamentiData.importoRichiesto}" type="text"
-					placeholder="Importo Richiesto">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">
+				<label for="importoRichiesto" >Importo
+					Richiesto:</label><br> <form:input path="importoRichiesto"
+					value="${finanziamentiData.importoRichiesto}" type="text"/>
+					<form:errors path="importoRichiesto" cssClass="error"/>
 				</div>
-				<label for="importoDeliberato" style="margin-left: -160px;">Importo
-					Deliberato </label> <input id="importoDeliberato" name="importoDeliberato"
+				<div class="col-sm-3">
+				<label for="importoDeliberato" >Importo
+					Deliberato </label><br> <form:input path="importoDeliberato"
 					value="${finanziamentiData.importoDeliberato}" type="number"
-					min="0.00" step="0.01" max="500000"
-					placeholder="Importo Deliberato">
-				<div class="bar">
-					<i></i>
+					min="0.00" step="0.01" max="500000"/>
+					<form:errors path="importoDeliberato" cssClass="error"/>
 				</div>
-								
-				<label for="dataApprovazioneConsiglio" style="margin-left: -160px;">Data
-					Approvazione Consiglio</label> <input id="dataApprovazioneConsiglio"
-					name="dataApprovazioneConsiglio"
-					value="${finanziamentiData.dataApprovazioneConsiglio}" type="text"
-					placeholder="Data Approvazione Consiglio">
-				<div class="bar">
-					<i></i>
+			</div>
+			<div class="row" style="margin-bottom:10px;">		
+				<div class="col-sm-3">			
+				<label for="dataApprovazioneConsiglio" >Data
+					Approvazione Consiglio</label><br> <form:input path="dataApprovazioneConsiglio"
+					value="${finanziamentiData.dataApprovazioneConsiglio}" type="text"/>
+					<form:errors path="dataApprovazioneConsiglio" cssClass="error"/>
 				</div>
-			
-				<label for="naturaFinanziamento" style="margin-left: -160px;">Natura
-					Finaniamento</label> <input id="naturaFinanziamento"
-					name="naturaFinanziamento"
-					value="${finanziamentiData.naturaFinanziamento}" type="text"
-					placeholder="Natura Finanziamento">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">
+				<label for="naturaFinanziamento" >Natura
+					Finaniamento</label><br> <form:input path="naturaFinanziamento"
+					value="${finanziamentiData.naturaFinanziamento}" type="text"/>
 				</div>
-				<label for="idGaranzia" style="margin-left: -160px;">Controgaranzia
-				</label> <select id="idGaranzia" name="idGaranzia">
+				<div class="col-sm-3">
+				<label for="idGaranzia" >Controgaranzia
+				</label><br> <form:select path="idGaranzia">
 				<option value="0" selected>Nessuna Controgaranzia</option>
 					<c:forEach var="garanzia" items="${garanziaList}">
 						<c:choose>
 							<c:when test="${finanziamentiData.idGaranzia eq garanzia.id}">
-								<option value="${garanzia.id}" selected>${garanzia.descrizione}</option>
+								<form:option value="${garanzia.id}" label="${garanzia.descrizione}" selected="true"/>
 							</c:when>
 							<c:otherwise>
-								<option value="${garanzia.id}">${garanzia.descrizione}</option>
+								<form:option value="${garanzia.id}" label="${garanzia.descrizione}"/>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-				</select> <label for="percentualeGaranzia" style="margin-left: -160px;">Percentuale
-					Garanzia</label> <input id="percentualeGaranzia" name="percentualeGaranzia"
-					value="${finanziamentiData.percentualeGaranzia}" type="text"
-					placeholder="Percentuale Garanzia">
-				<div class="bar">
-					<i></i>
+				</form:select> 
 				</div>
-				<label for="costi" style="margin-left: -160px;">Costi
-					Finanziamento</label> <input id="costi" name="costi"
-					value="${finanziamentiData.costi}" type="text"
-					placeholder="Costi Finanziamento">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">
+				<label for="percentualeGaranzia" >Percentuale
+					Garanzia</label><br> <form:input path="percentualeGaranzia"
+					value="${finanziamentiData.percentualeGaranzia}" type="text"/>
+					<form:errors path="percentualeGaranzia" cssClass="error"/>
 				</div>
-				<label for="importoGaranzia" style="margin-left: -160px;">Importo
-					Garantito </label> <input id="importoGaranzia" name="importoGaranzia"
+			</div>
+			<div class="row" style="margin-bottom:10px;">		
+				<div class="col-sm-3">			
+				<label for="costi" >Costi
+					Finanziamento</label><br> <form:input path="costi"
+					value="${finanziamentiData.costi}" type="text"/>
+				</div>
+				<div class="col-sm-3">			
+				<label for="importoGaranzia" >Importo
+					Garantito </label><br> <form:input path="importoGaranzia"
 					value="${finanziamentiData.importoGaranzia}" type="number"
-					min="0.00" step="0.01" max="500000" placeholder="Importo Garantito">
-				<div class="bar">
-					<i></i>
+					min="0.00" step="0.01" max="500000"/>
+					<form:errors path="importoGaranzia" cssClass="error"/>
 				</div>
-				<label for="rateRichieste" style="margin-left: -160px;">Rate Richieste</label> <input
-					id="rateRichieste" name="rateRichieste" value="${finanziamentiData.rateRichieste}" type="text"
-					placeholder="Rate Richieste">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">			
+				<label for="rateRichieste" >Rate Richieste</label><br> <form:input
+					path="rateRichieste" value="${finanziamentiData.rateRichieste}" type="text"/>
+					<form:errors path="rateRichieste" cssClass="error"/>
 				</div>
-				<label for="costoIstruttoria" style="margin-left: -160px;">Istruttoria </label> <input
-					id="costoIstruttoria" name="costoIstruttoria" value="${finanziamentiData.costoIstruttoria}"  type="number"
-					min="0.00" step="10.00" max="500000" placeholder="Istruttoria">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">			
+				<label for="costoIstruttoria" >Istruttoria </label><br> <form:input
+					path="costoIstruttoria" value="${finanziamentiData.costoIstruttoria}"  type="number"
+					min="0.00" step="10.00" max="500000" />
 				</div>				
-				<label for="note" style="margin-left: -160px;">Note</label> <input
-					id="note" name="note" value="${finanziamentiData.note}" type="text"
-					placeholder="Note">
-				<div class="bar">
-					<i></i>
+			</div>
+			<div class="row" style="margin-bottom:10px;">		
+				<div class="col-sm-3">			
+				<label for="note" >Note</label><br> <form:textarea
+					path="note" rows="10" cols="100" value="${finanziamentiData.note}" type="text"/>
 				</div>
+			</div>
 			</div>
 
 			<div id="i10">
-				<label for="idBanche" style="margin-left: -160px;">Banca </label> 
-				<select id="idBanche" name="idBanche">
+				<div class="row" style="margin-bottom:10px;">		
+				<div class="col-sm-3">
+				<label for="idBanche" >Banca </label><br> 
+				<form:select path="idBanche">
 					<c:forEach var="banca" items="${bancheList}">
 						<c:choose>
 							<c:when test="${finanziamentiData.idBanche eq banca.id}">
-								<option value="${banca.id}" selected>${banca.descrizione}</option>
+								<form:option value="${banca.id}" label="${banca.descrizione}" selected="true"/>
 							</c:when>
 							<c:otherwise>
-								<option value="${banca.id}">${banca.descrizione}</option>
+								<form:option value="${banca.id}" label="${banca.descrizione}"/>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-				</select> 
-				<div class="bar">
-					<i></i>
+				</form:select> 
 				</div>
-				<label for="importo" style="margin-left: -160px;">Importo
-					Erogato:</label> <input id="importo" name="importo"
-					value="${finanziamentiData.importo}" type="text"
-					placeholder="Importo Erogato">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">
+				<label for="importo" >Importo
+					Erogato:</label><br> <form:input path="importo"
+					value="${finanziamentiData.importo}" type="text"/>
 				</div>
-				<label for="rate" style="margin-left: -160px;">Rate </label> <input
-					id="rate" name="rate" value="${finanziamentiData.rate}" type="text"
-					placeholder="Rate">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">
+				<label for="rate" >Rate </label><br> <form:input
+					path="rate" value="${finanziamentiData.rate}" type="text"/>
 				</div>
-				<label for="importoRata" style="margin-left: -160px;">Importo Rata</label>
-				<input id="importoRata" name="importoRata"
-					value="${finanziamentiData.importoRata}" type="text"
-					placeholder="Importo Rata">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">
+				<label for="importoRata" >Importo Rata</label><br>
+				<form:input path="importoRata"
+					value="${finanziamentiData.importoRata}" type="text"/>
 				</div>
-					<label for="dataErogazioneFinanziamento"
-					style="margin-left: -160px;">Data Erogazione
-					Finananziamento </label> <input id="dataErogazioneFinanziamento"
-					name="dataErogazioneFinanziamento"
+			</div>
+			<div class="row" style="margin-bottom:10px;">		
+				<div class="col-sm-3">
+				<label for="dataErogazioneFinanziamento"
+					>Data Erogazione
+					Finananziamento </label><br> <form:input path="dataErogazioneFinanziamento"
 					value="${finanziamentiData.dataErogazioneFinanziamento}"
-					type="text" placeholder="Data Erogazione Finananziamento">
-				<div class="bar">
-					<i></i>
+					type="text" />
 				</div>
-				<label for="dataFineFinanziamento" style="margin-left: -160px;">Data
-					Fine Finanziamento</label> <input id="dataFineFinanziamento"
-					name="dataFineFinanziamento"
-					value="${finanziamentiData.dataFineFinanziamento}" type="text"
-					placeholder="Data Fine Finanziamento">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">	
+				<label for="dataFineFinanziamento" >Data
+					Fine Finanziamento</label><br> <form:input path="dataFineFinanziamento"
+					value="${finanziamentiData.dataFineFinanziamento}" type="text"/>
 				</div>
-				<label for="accredito" style="margin-left: -160px;">Accredito </label> <input
-					id="accredito" name="accredito" value="${finanziamentiData.accredito}" type="text"
-					placeholder="Accredito">
-				<div class="bar">
-					<i></i>
-				</div>				
+				<div class="col-sm-3">
+				<label for="accredito" >Accredito </label><br> 
+				<form:input path="accredito" value="${finanziamentiData.accredito}" type="text"/>
+				</div>
+			</div>				
 				<input type="submit" value="Salva" style="margin-top: 35px;">
 			</div>
 	</form:form>

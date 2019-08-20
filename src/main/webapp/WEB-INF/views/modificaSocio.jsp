@@ -16,402 +16,355 @@
 			<li class="active"><a data-toggle="tab" aria-expanded="false"
 				id="i1"><span class="nmbr">1</span>Anagrafica Azienda</a></li>
 			<li><a data-toggle="tab" aria-expanded="false" id="i2"><span
-					class="nmbr">2</span>Indirizzi Azienda</a></li>
-			<li><a data-toggle="tab" aria-expanded="false" id="i3"><span
-					class="nmbr">3</span>Anagrafica Titolare</a></li>
-			<li><a data-toggle="tab" aria-expanded="false" id="i4"><span
-					class="nmbr">4</span>Iscrizione Cofidi</a></li>
+					class="nmbr">2</span>Iscrizione Cofidi</a></li>
 			<li><a data-toggle="tab" aria-expanded="true" id="i5"><span
-					class="nmbr">5</span>Finanziamenti</a></li>
+					class="nmbr">3</span>Finanziamenti</a></li>
 		</ul>
 	</div>
 
-	<div class="wrap" style="margin-top: 10px; margin-bottom: 50px;">
+	<div class="col-sm-12" style="margin-top: 10px; margin-bottom: 50px;">
 		<form:form action="updateSocio" method="POST" class="form-signin"
 			modelAttribute="sociData">
 			<div id="i9">
+			<div class="row" style="margin-bottom:10px;">		
+				<div class="col-sm-3">
 				<input id="idSoci" name="idSoci" value="${sociData.idSoci}"
-					type="hidden"> <label for="impresa"
-					style="margin-left: -160px;">Denominazione sociale</label> <input
-					id="impresa" name="impresa" value="${sociData.impresa}" type="text"
-					placeholder="Denominazione sociale">
-				<div class="bar">
-					<i></i>
-				</div>
-				<label for="idTipoSocieta" style="margin-left: -160px;">Tipo
-					Societ√†</label> <select id="idTipoSocieta" name="idTipoSocieta">
+					type="hidden"> <label for="impresa">Denominazione sociale</label><br><form:input
+					path="impresa" value="${sociData.impresa}" type="text"/>
+					<form:errors path="impresa" cssClass="error"/>
+				</div>	
+				<div class="col-sm-3">
+				<label for="idTipoSocieta" >Tipo
+					Societ‡†</label><br> <form:select path="idTipoSocieta">
 					<c:forEach var="tipoSocieta" items="${tipoSocietaList}">
 						<c:choose>
 							<c:when test="${sociData.idTipoSocieta eq tipoSocieta.id}">
-								<option value="${tipoSocieta.id}" selected>${tipoSocieta.descrizione}</option>
+								<form:option value="${tipoSocieta.id}" label="${tipoSocieta.descrizione }" selected="true"/>
 							</c:when>
 							<c:otherwise>
-								<option value="${tipoSocieta.id}">${tipoSocieta.descrizione}</option>
+								<form:option value="${tipoSocieta.id}" label="${tipoSocieta.descrizione}"/>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-				</select>
-				<div class="bar">
-					<i></i>
+				</form:select>
 				</div>
-				<label for="codiceFiscale" style="margin-left: -160px;">Codice
-					Fiscale</label> <input id="codiceFiscale" name="codiceFiscale"
-					value="${sociData.codiceFiscale}" type="text"
-					placeholder="Codice Fiscale">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">
+				<label for="codiceFiscale">Codice
+					Fiscale</label><br> <form:input path="codiceFiscale"
+					value="${sociData.codiceFiscale}" type="text"/>
+					<form:errors path="codiceFiscale" cssClass="error"/>
 				</div>
-				<label for="partitaIva" style="margin-left: -160px;">Partita
-					Iva</label> <input id="partitaIva" name="partitaIva"
-					value="${sociData.partitaIva}" type="text"
-					placeholder="Partita Iva">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">
+				<label for="partitaIva" >Partita
+					Iva</label><br> <form:input path="partitaIva"
+					value="${sociData.partitaIva}" type="text"/>
+					<form:errors path="partitaIva" cssClass="error"/>
 				</div>
-				<label for="idSettoreImpresa" style="margin-left: -160px;">Settore
-					d'Impresa</label> <select id="idSettoreImpresa" name="idSettoreImpresa">
+			</div>
+			<div class="row" style="margin-bottom:10px;">		
+				<div class="col-sm-3">
+				<label for="idSettoreImpresa" >Settore
+					d'Impresa</label><br> <form:select path="idSettoreImpresa">
 					<c:forEach var="settoreImpresa" items="${settoreImpresaList}">
 						<c:choose>
 							<c:when test="${sociData.idSettoreImpresa eq settoreImpresa.id}">
-								<option value="${settoreImpresa.id}" selected>${settoreImpresa.descrizione}</option>
+								<option value="${settoreImpresa.id}" label="${settoreImpresa.descrizione}" selected="true" />
 							</c:when>
 							<c:otherwise>
-								<option value="${settoreImpresa.id}">${settoreImpresa.descrizione}</option>
+								<option value="${settoreImpresa.id}" label="${settoreImpresa.descrizione}"/>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-				</select>
-				<div class="bar">
-					<i></i>
+				</form:select>
 				</div>
-				<label for="numeroDipendenti" style="margin-left: -160px;">Numero
-					Addetti</label> <input id="numeroDipendenti" name="numeroDipendenti"
-					value="${sociData.numeroDipendenti}" type="text"
-					placeholder="Numero Addetti">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">				
+				<label for="numeroDipendenti" >Numero
+					Addetti</label><br> <form:input path="numeroDipendenti"
+					value="${sociData.numeroDipendenti}" type="text"/>
 				</div>
-				<label for="dataCostituzione" style="margin-left: -160px;">Data
-					Costituzione</label> <input id="dataCostituzione" name="dataCostituzione"
-					value="${sociData.dataCostituzione}" type="text"
-					placeholder="Data Costituzione">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">
+				<label for="dataCostituzione" >Data
+					Costituzione</label><br> <form:input path="dataCostituzione"
+					value="${sociData.dataCostituzione}" type="text"/>
+					<form:errors path="dataCostituzione" cssClass="error"/>
 				</div>
-				<label for="dataAttivita" style="margin-left: -160px;">Data
-					Inizio Attivit√†</label> <input id="dataAttivita" name="dataAttivita"
-					value="${sociData.dataAttivita}" type="text"
-					placeholder="Data Inizio Attivit√†">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">
+				<label for="dataAttivita" >Data
+					Inizio Attivit‡†</label><br> <form:input path="dataAttivita"
+					value="${sociData.dataAttivita}" type="text"/>
+					<form:errors path="dataAttivita" cssClass="error"/>
 				</div>
-				<label for="telefono" style="margin-left: -160px;">Telefono</label>
-				<input id="telefono" name="telefono" value="${sociData.telefono}"
-					type="text" placeholder="Telefono">
-				<div class="bar">
-					<i></i>
+			</div>
+			<div class="row" style="margin-bottom:10px;">		
+				<div class="col-sm-3">
+				<label for="telefono" >Telefono</label><br>
+				<form:input path="telefono" value="${sociData.telefono}"
+					type="text"/>
 				</div>
-				<label for="mobile" style="margin-left: -160px;">Cellulare</label> <input
-					id="mobile" name="mobile" value="${sociData.mobile}" type="text"
-					placeholder="Cellulare">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">
+				<label for="mobile" >Cellulare</label><br> <form:input
+					path="mobile" value="${sociData.mobile}" type="text"/>
 				</div>
-				<label for="email" style="margin-left: -160px;">E-Mail</label> <input
-					id="email" name="email" value="${sociData.email}" type="text"
-					placeholder="E-Mail">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">
+				<label for="email" >E-Mail</label><br> <form:input
+					path="email" value="${sociData.email}" type="text"/>				
 				</div>
-				<label for="fax" style="margin-left: -160px;">Fax</label> <input
-					id="fax" name="fax" value="${sociData.fax}" type="text"
-					placeholder="Fax">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">
+				<label for="fax" >Fax</label><br> <form:input
+					path="fax" value="${sociData.fax}" type="text"/>
 				</div>
 			</div>
 
+
+			<div class="row" style="margin-bottom:10px;">		
+				<div class="col-sm-3">
+				<label for="indirizzoSedeLegale" >Indirizzo
+					Sede Legale</label><br> <form:input path ="indirizzoSedeLegale" value="${sociData.indirizzoSedeLegale}"
+					type="text"/>
+					<form:errors path="indirizzoSedeLegale" cssClass="error"/>
+				</div>
+				<div class="col-sm-3">
+				<label for="cittaSedeLegale" >Citt‡†
+					Sede Legale</label><br> <form:input path="cittaSedeLegale"
+					value="${sociData.cittaSedeLegale}" type="text"/>
+					<form:errors path="cittaSedeLegale" cssClass="error"/>
+				</div>
+				<div class="col-sm-3">
+				<label for="capSedeLegale" >Cap
+					Sede Legale</label><br> <form:input path="capSedeLegale"
+					value="${sociData.capSedeLegale}" type="text"/>
+					<form:errors path="capSedeLegale" cssClass="error"/>
+				</div>
+				<div class="col-sm-3">
+				<label for="provinciaSedeLegale" >Provincia
+					Sede Legale</label><br> <form:input path="provinciaSedeLegale" value="${sociData.provinciaSedeLegale}"
+					type="text" maxlength="2"/>
+					<form:errors path="provinciaSedeLegale" cssClass="error"/>
+				</div>
+			</div>
+			<div class="row" style="margin-bottom:10px;">		
+				<div class="col-sm-3">
+				<label for="indirizzoAzienda" >Indirizzo
+					Azienda</label><br> <form:input path="indirizzoAzienda"
+					value="${sociData.indirizzoAzienda}" type="text"/>
+				</div>
+				<div class="col-sm-3">
+				<label for="cittaAzienda" >Citt‡ 
+					Azienda</label><br> <form:input path="cittaAzienda"
+					value="${sociData.cittaAzienda}" type="text"/>
+				</div>
+				<div class="col-sm-3">
+				<label for="capAzienda" >Cap
+					Azienda</label><br> <form:input path="capAzienda"
+					value="${sociData.capAzienda}" type="text"/>
+				</div>
+				<div class="col-sm-3">
+				<label for="provinciaAzienda" >Provincia
+					Azienda</label><br> <form:input path="provinciaAzienda"
+					value="${sociData.provinciaAzienda}" type="text"
+					maxlength="2"/>
+				</div>
+			</div>
+			<div class="row" style="margin-bottom:10px;">		
+				<div class="col-sm-3">
+				<label for="indirizzoSedeOperativa" >Indirizzo
+					Sede Operativa</label><br> <form:input path="indirizzoSedeOperativa"
+					value="${sociData.indirizzoSedeOperativa}" type="text"/>
+				</div>
+				<div class="col-sm-3">
+				<label for="cittaSedeOperativa" >Citt‡†
+					Sede Operativa</label><br> <form:input path="cittaSedeOperativa"
+					value="${sociData.cittaSedeOperativa}"
+					type="text" />
+				</div>
+				<div class="col-sm-3">
+				<label for="capSedeOperativa" >Cap
+					Sede Operativa</label><br> <form:input path="capSedeOperativa"
+					value="${sociData.capSedeOperativa}" type="text"/>
+				</div>
+				<div class="col-sm-3">
+				<label for="provinciaSedeOperativa" >Provincia
+					Sede Operativa</label><br> <form:input path="provinciaSedeOperativa"
+					value="${sociData.provinciaSedeOperativa}" type="text"
+				    maxlength="2"/>
+				</div>
+			</div>
+			</div>
 
 			<div id="i10">
-				<label for="indirizzoSedeLegale" style="margin-left: -160px;">Indirizzo
-					Sede Legale</label> <input id="indirizzoSedeLegale"
-					name="indirizzoSedeLegale" value="${sociData.indirizzoSedeLegale}"
-					type="text" placeholder="Indirizzo Sede Legale">
-				<div class="bar">
-					<i></i>
+			<div class="row" style="margin-bottom:10px;">		
+				<div class="col-sm-3">
+				<label for="nome" >Nome</label><br> <form:input
+					path="nome" value="${sociData.nome}" type="text"
+					placeholder="Nome"/>
+					<form:errors path="nome" cssClass="error"/>
 				</div>
-				<label for="cittaSedeLegale" style="margin-left: -160px;">Citt√†
-					Sede Legale</label> <input id="cittaSedeLegale" name="cittaSedeLegale"
-					value="${sociData.cittaSedeLegale}" type="text"
-					placeholder="Citt√† Sede Legale">
-				<div class="bar">
-					<i></i>
-				</div>
-				<label for="capSedeLegale" style="margin-left: -160px;">Cap
-					Sede Legale</label> <input id="capSedeLegale" name="capSedeLegale"
-					value="${sociData.capSedeLegale}" type="text"
-					placeholder="Cap Sede Legale">
-				<div class="bar">
-					<i></i>
-				</div>
-				<label for="provinciaSedeLegale" style="margin-left: -160px;">Provincia
-					Sede Legale</label> <input id="provinciaSedeLegale"
-					name="provinciaSedeLegale" value="${sociData.provinciaSedeLegale}"
-					type="text" placeholder="Provincia Sede Legale">
-				<div class="bar">
-					<i></i>
-				</div>
-				<label for="indirizzoAzienda" style="margin-left: -160px;">Indirizzo
-					Azienda</label> <input id="indirizzoAzienda" name="indirizzoAzienda"
-					value="${sociData.indirizzoAzienda}" type="text"
-					placeholder="Indirizzo Sede Azienda">
-				<div class="bar">
-					<i></i>
-				</div>
-				<label for="cittaAzienda" style="margin-left: -160px;">Citt√†
-					Azienda</label> <input id="cittaAzienda" name="cittaAzienda"
-					value="${sociData.cittaAzienda}" type="text"
-					placeholder="Citt√† Sede Azienda">
-				<div class="bar">
-					<i></i>
-				</div>
-				<label for="capAzienda" style="margin-left: -160px;">Cap
-					Azienda</label> <input id="capAzienda" name="capAzienda"
-					value="${sociData.capAzienda}" type="text"
-					placeholder="Cap Sede Azienda">
-				<div class="bar">
-					<i></i>
-				</div>
-				<label for="provinciaAzienda" style="margin-left: -160px;">Provincia
-					Azienda</label> <input id="provinciaAzienda" name="provinciaAzienda"
-					value="${sociData.provinciaAzienda}" type="text"
-					placeholder="Provincia Sede Azienda">
-				<div class="bar">
-					<i></i>
-				</div>
-				<label for="indirizzoSedeOperativa" style="margin-left: -160px;">Indirizzo
-					Sede Operativa</label> <input id="indirizzoSedeOperativa"
-					name="indirizzoSedeOperativa"
-					value="${sociData.indirizzoSedeOperativa}" type="text"
-					placeholder="Indirizzo Sede Operativa">
-				<div class="bar">
-					<i></i>
-				</div>
-				<label for="cittaSedeOperativa" style="margin-left: -160px;">Citt√†
-					Sede Operativa</label> <input id="cittaSedeOperativa"
-					name="cittaSedeOperativa" value="${sociData.cittaSedeOperativa}"
-					type="text" placeholder="Citt√† Sede Operativa">
-				<div class="bar">
-					<i></i>
-				</div>
-				<label for="capSedeOperativa" style="margin-left: -160px;">Cap
-					Sede Operativa</label> <input id="capSedeOperativa" name="capSedeOperativa"
-					value="${sociData.capSedeOperativa}" type="text"
-					placeholder="Cap Sede Operativa">
-				<div class="bar">
-					<i></i>
-				</div>
-				<label for="provinciaSedeOperativa" style="margin-left: -160px;">Provincia
-					Sede Operativa</label> <input id="provinciaSedeOperativa"
-					name="provinciaSedeOperativa"
-					value="${sociData.provinciaSedeOperativa}" type="text"
-					placeholder="Provincia Sede Operativa">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">
+				<label for="cognome" >Cognome</label><br> <form:input
+					path="cognome" value="${sociData.cognome}" type="text"
+					placeholder="Cognome"/>
+					<form:errors path="cognome" cssClass="error"/>
 				</div>
 			</div>
-
-			<div id="i11">
-				<label for="nome" style="margin-left: -160px;">Nome</label> <input
-					id="nome" name="nome" value="${sociData.nome}" type="text"
-					placeholder="Nome">
-				<div class="bar">
-					<i></i>
-				</div>
-				<label for="cognome" style="margin-left: -160px;">Cognome</label> <input
-					id="cognome" name="cognome" value="${sociData.cognome}" type="text"
-					placeholder="Cognome">
-				<div class="bar">
-					<i></i>
-				</div>
-				<label for="idQualitaTitolare" style="margin-left: -160px;">In
-					qualit√† di</label> <select id="idQualitaTitolare" name="idQualitaTitolare">
+			<div class="row" style="margin-bottom:10px;">		
+				<div class="col-sm-3">
+				<label for="idQualitaTitolare" >In
+					qualit‡† di</label><br> <form:select path="idQualitaTitolare">
 					<c:forEach var="qualitaTitolare" items="${qualitaTitolareList}">
 						<c:choose>
 							<c:when
 								test="${sociData.idQualitaTitolare eq qualitaTitolare.id}">
-								<option value="${qualitaTitolare.id}" selected>${qualitaTitolare.descrizione}</option>
+								<form:option value="${qualitaTitolare.id}" label="${qualitaTitolare.descrizione}" selected="true"/>
 							</c:when>
 							<c:otherwise>
-								<option value="${qualitaTitolare.id}">${qualitaTitolare.descrizione}</option>
+								<form:option value="${qualitaTitolare.id}" label="${qualitaTitolare.descrizione}"/>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-				</select>
-				<div class="bar">
-					<i></i>
+				</form:select>
 				</div>
-				<label for="codiceFiscaleTitolare" style="margin-left: -160px;">Codice
-					Fiscale</label> <input id="codiceFiscaleTitolare"
-					name="codiceFiscaleTitolare"
+				<div class="col-sm-3">
+				<label for="codiceFiscaleTitolare" >Codice
+					Fiscale</label><br> <form:input path="codiceFiscaleTitolare"
 					value="${sociData.codiceFiscaleTitolare}" type="text"
-					placeholder="Codice Fiscale">
-				<div class="bar">
-					<i></i>
+					placeholder="Codice Fiscale"/>
+					<form:errors path="codiceFiscaleTitolare" cssClass="error"/>
 				</div>
-				<label for="dataDiNascita" style="margin-left: -160px;">Data
-					di Nascita</label> <input id="dataDiNascita" name="dataDiNascita"
+				<div class="col-sm-3">
+				<label for="dataDiNascita" >Data
+					di Nascita</label><br> <form:input path="dataDiNascita"
 					value="${sociData.dataDiNascita}" type="text"
-					placeholder="Data di nascita">
-				<div class="bar">
-					<i></i>
+					placeholder="Data di nascita"/>
+					<form:errors path="dataDiNascita" cssClass="error"/>
 				</div>
-				<label for="luogoDiNascita" style="margin-left: -160px;">Luogo
-					di Nascita</label> <input id="luogoDiNascita" name="luogoDiNascita"
+				<div class="col-sm-3">
+				<label for="luogoDiNascita" >Luogo
+					di Nascita</label><br> <form:input path="luogoDiNascita"
 					value="${sociData.luogoDiNascita}" type="text"
-					placeholder="Luogo di Nascita">
-				<div class="bar">
-					<i></i>
-				</div>
-				<label for="indirizzoResidenza" style="margin-left: -160px;">Indirizzo
-					di Residenza</label> <input id="indirizzoResidenza"
-					name="indirizzoResidenza" value="${sociData.indirizzoResidenza}"
-					type="text" placeholder="Indirizzo Residenza">
-				<div class="bar">
-					<i></i>
-				</div>
-				<label for="cittaResidenza" style="margin-left: -160px;">Citt√†
-					di Residenza</label> <input id="cittaResidenza" name="cittaResidenza"
-					value="${sociData.cittaResidenza}" type="text"
-					placeholder="Citt√† Residenza">
-				<div class="bar">
-					<i></i>
-				</div>
-				<label for="capResidenza" style="margin-left: -160px;">Cap
-					Residenza</label> <input id="capResidenza" name="capResidenza"
-					value="${sociData.capResidenza}" type="text"
-					placeholder="Cap Residenza">
-				<div class="bar">
-					<i></i>
-				</div>
-				<label for="provinciaResidenza" style="margin-left: -160px;">Provincia
-					Residenza</label> <input id="provinciaResidenza" name="provinciaResidenza"
-					value="${sociData.provinciaResidenza}" type="text"
-					placeholder="Provincia Residenza">
-				<div class="bar">
-					<i></i>
+					placeholder="Luogo di Nascita"/>
+					<form:errors path="luogoDiNascita" cssClass="error"/>
 				</div>
 			</div>
-
-			<div id="i12">
-				<label for="dataInizio" style="margin-left: -160px;">Data
-					Inizio Rapporto</label> <input type="text" id="dataInizio"
-					name="dataInizio" placeholder="Data Inizio"
-					value="${sociData.dataInizio}">
-				<div class="bar">
-					<i></i>
+			<div class="row" style="margin-bottom:10px;">		
+				<div class="col-sm-3">
+				<label for="indirizzoResidenza" >Indirizzo
+					di Residenza</label><br> <form:input path="indirizzoResidenza" value="${sociData.indirizzoResidenza}"
+					type="text" placeholder="Indirizzo Residenza"/>
+					<form:errors path="indirizzoResidenza" cssClass="error"/>
 				</div>
-				<label for="dataCessazione" style="margin-left: -160px;">Data
-					Cessazione Rapporto</label> <input id="dataCessazione"
-					name="dataCessazione" type="text"
-					value="${sociData.dataCessazione}" placeholder="Data Cessazione">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">
+				<label for="cittaResidenza" >Citt‡†
+					di Residenza</label><br> <form:input path="cittaResidenza"
+					value="${sociData.cittaResidenza}" type="text"
+					placeholder="Citt‡† Residenza"/>
+					<form:errors path="cittaResidenza" cssClass="error"/>
 				</div>
-				<label for="cciaa" style="margin-left: -160px;">CCIAA</label> <input
-					id="cciaa" name="cciaa" value="${sociData.cciaa}" type="text"
-					placeholder="Iscritto alla CCIAA">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">
+				<label for="capResidenza" >Cap
+					Residenza</label><br> <form:input path="capResidenza"
+					value="${sociData.capResidenza}" type="text"
+					placeholder="Cap Residenza"/>
+					<form:errors path="capResidenza" cssClass="error"/>
 				</div>
-				<label for="rea" style="margin-left: -160px;">REA</label> <input
-					id="rea" name="rea" value="${sociData.rea}" type="text"
-					placeholder="REA">
-				<div class="bar">
-					<i></i>
+				<div class="col-sm-3">
+				<label for="provinciaResidenza" >Provincia
+					Residenza</label><br> <form:input path="provinciaResidenza"
+					value="${sociData.provinciaResidenza}" type="text"
+					placeholder="Provincia Residenza" maxlength="2"/>
+					<form:errors path="provinciaResidenza" cssClass="error"/>
 				</div>
+			</div>
+			<div class="row" style="margin-bottom:10px;">		
+				<div class="col-sm-3">
+				<label for="dataInizio" >Data
+					Inizio Rapporto</label><br> <form:input type="text"
+					path="dataInizio" placeholder="Data Inizio"
+					value="${sociData.dataInizio}"/>
+					<form:errors path="dataInizio" cssClass="error"/>
+				</div>
+				<div class="col-sm-3">
+				<label for="dataCessazione" >Data
+					Cessazione Rapporto</label><br> <form:input path="dataCessazione" type="text"
+					value="${sociData.dataCessazione}" placeholder="Data Cessazione"/>
+				</div>
+				<div class="col-sm-3">
+				<label for="cciaa" >CCIAA</label><br> <form:input
+					path="cciaa" value="${sociData.cciaa}" type="text"
+					placeholder="Iscritto alla CCIAA"/>
+					<form:errors path="cciaa" cssClass="error"/>
+				</div>
+				<div class="col-sm-3">
+				<label for="rea" >REA</label><br> <form:input
+					path="rea" value="${sociData.rea}" type="text"
+					placeholder="REA"/>
+					<form:errors path="rea" cssClass="error"/>
+				</div>
+			</div>
 				  <div class="row">
 				        <div class="col-xs-5">
-				            <select name="from[]" id="search" class="form-control" size="8" multiple="multiple" style="width: 300px;height: 300px;margin-left: -210px;">
+				            <select name="from[]" id="search" class="form-control" size="8" multiple="multiple" style="width: 600px;height: 300px;">
 				                <c:forEach var="ateco" items="${atecoList}">
 									<option value="${ateco.id }">${ateco.descrizione}</option>
 								</c:forEach>
 				            </select>
 				        </div>
 				        
-				        <div class="col-xs-4" style="margin-top: 20px !important;width: 70px;">
+				        <div class="col-xs-4" style="margin-top: 120px !important;width: 70px;margin-left:30px !important">
 				        	<button type="button" id="search_rightSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
 				            <button type="button" id="search_leftSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
 				        </div>
 				        
 				        <div class="col-xs-3">
-				            <select name="to[]" id="search_to" class="form-control" size="8" multiple="multiple" style="width: 300px;height:  300px;">
+				            <select name="to[]" id="search_to" class="form-control" size="8" multiple="multiple" style="width: 600px;height:  300px;">
 				            	<option value=""></option>
 				            </select>
 				        </div>
-				    </div>
-<!-- 				<select multiple id="idAteco" name="idAteco" -->
-<!-- 					style="height: 210px; width: 1000px; margin-left: -350px ! important;"> -->
-<%-- 					<c:forEach var="ateco" items="${atecoList}"> --%>
-<%-- 						<option value="${ateco.id }">${ateco.descrizione}</option> --%>
-<%-- 					</c:forEach> --%>
-<!-- 				</select> -->
-				<div class="bar">
-					<i></i>
-				</div>
-				<label for="tipologiaMerceologica" style="margin-left: -160px;">Tipologia
-					Merceologica</label> <input id="tipologiaMerceologica"
-					name="tipologiaMerceologica"
+				    </div> 				
+			<div class="row" style="margin-bottom:10px;">		
+				<div class="col-sm-3">
+				<label for="tipologiaMerceologica" >Tipologia
+					Merceologica</label><br> <form:input path="tipologiaMerceologica"
 					value="${sociData.tipologiaMerceologica}" type="text"
-					placeholder="Tipologia Merceologica">
-				<div class="bar">
-					<i></i>
+					placeholder="Tipologia Merceologica"/>
+					<form:errors path="tipologiaMerceologica" cssClass="error"/>
 				</div>
-				<label for="idStatoSocio" style="margin-left: -160px;">Stato
-					Socio</label> <select id="idStatoSocio" name="idStatoSocio">
+				<div class="col-sm-3">
+				<label for="idStatoSocio" >Stato
+					Socio</label><br> <form:select path="idStatoSocio">
 					<c:forEach var="statoSocio" items="${statoSocioList}">
 						<c:choose>
 							<c:when test="${sociData.idStatoSocio eq statoSocio.id}">
-								<option value="${statoSocio.id}" selected>${statoSocio.descrizione}</option>
+								<form:option value="${statoSocio.id}" label="${statoSocio.descrizione}" selected="true" />
 							</c:when>
 							<c:otherwise>
-								<option value="${statoSocio.id}">${statoSocio.descrizione}</option>
+								<form:option value="${statoSocio.id}" label="${statoSocio.descrizione}"/>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-				</select>
-				<div class="bar">
-					<i></i>
+				</form:select>
 				</div>
-				<label for="numeroLibroSoci" style="margin-left: -160px;">Numero
-					Libro Soci</label> <input id="numeroLibroSoci" name="numeroLibroSoci"
+				<div class="col-sm-3">
+				<label for="numeroLibroSoci" >Numero
+					Libro Soci</label><br> <form:input path="numeroLibroSoci"
 					value="${sociData.numeroLibroSoci}" type="number"
-					placeholder="Numero Libro Soci">
-				<div class="bar">
-					<i></i>
+					placeholder="Numero Libro Soci" min="0"/>
 				</div>
-				<label for="numeroQuote" style="margin-left: -160px;">Numero
-					Quote</label> <input id="numeroQuote" name="numeroQuote"
+				<div class="col-sm-3">
+				<label for="numeroQuote" >Numero
+					Quote</label><br> <form:input path="numeroQuote"
 					value="${sociData.numeroQuote}" type="number"
-					placeholder="Numero Quote Pagate">
-				<div class="bar">
-					<i></i>
+					placeholder="Numero Quote Pagate" min="0"/>
 				</div>
-				<label for="importoQuote" style="margin-left: -160px;">Importo
-					Quote</label> <input id="importoQuote" name="importoQuote"
+			</div>
+			<div class="row" style="margin-bottom:10px;">		
+				<div class="col-sm-3">
+				<label for="importoQuote" >Importo
+					Quote</label><br> <form:input path="importoQuote"
 					value="${sociData.importoQuote}" type="number" min="0.00"
-					step="0.01" max="500000" placeholder="Importo Quota">
-				<div class="bar">
-					<i></i>
+					step="0.01" max="500000" placeholder="Importo Quota"/>
 				</div>
-				<label for="utenteRegistrazione" style="margin-left: -160px;">Utente
-					Registrazione</label> <input id="utenteRegistrazione"
-					name="utenteRegistrazione" value="" type="text"
-					placeholder="Utente che effettua la registrazione" readonly>
-				<div class="bar">
-					<i></i>
-				</div>
-				<div id="atecoTable">
+			</div>
+				<div id="atecoTable" style="margin-top: 50px;">
 					<table id="elencoSociAteco" class="display responsive nowrap"
 						style="margin-top: 20px; width: 100%;">
 						<thead>
@@ -430,13 +383,13 @@
 						</tbody>
 					</table>
 				</div>
-				<input type="submit" value="Salva" style="margin-top: 35px;">
+				<input type="submit" value="Salva" style="margin-top:35px;">
 			</div>
 
 		</form:form>
 
 	</div>
-	<div id="i13">
+	<div id="i11">
 		<a href="inserisciFinanziamentoSocio?idSocio=${socioData.idSocio}">
 		<img title="Inserisci Finanziamento" src="images/icons/add.png"
 		alt="Modifica Socio" height="25px" width="25px">
@@ -493,8 +446,8 @@
 	 jQuery(document).ready(function($) {
 	        $('#search').multiselect({
 	            search: {
-	                left: '<input type="text" name="q" class="form-control" placeholder="Search..." style="width:  300px;margin-left:  -210px;"/>',
-	                right: '<input type="text" name="q" class="form-control" placeholder="Search..." style="width:  300px;"/>',
+	                left: '<input type="text" name="q" class="form-control" placeholder="Search..." style="width:  600px;"/>',
+	                right: '<input type="text" name="q" class="form-control" placeholder="Search..." style="width:  600px;"/>',
 	            },
 	            fireSearch: function(value) {
 	                return value.length > 3;

@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import it.cofidimpresa.data.FinanziamentiData;
 import it.cofidimpresa.data.FinanziamentiTableData;
 import it.cofidimpresa.data.SociData;
 import it.cofidimpresa.data.SociTableData;
@@ -34,37 +33,41 @@ import it.cofidimpresa.facades.SettoreImpresaFacade;
 import it.cofidimpresa.facades.SociFacade;
 import it.cofidimpresa.facades.StatoSocioFacade;
 import it.cofidimpresa.facades.TipoSocietaFacade;
+import it.cofidimpresa.validator.SociValidator;
 
 @Controller
 public class SociController {
 	private static final Logger logger = Logger.getLogger(SociController.class);
 
 	@Resource
-	ApplicationContext context;
+	private ApplicationContext context;
 
 	@Resource(name = "messageSource")
-	ReloadableResourceBundleMessageSource messageSource;
+	private ReloadableResourceBundleMessageSource messageSource;
 
 	@Resource(name = "sociFacade")
-	SociFacade sociFacade;
+	private SociFacade sociFacade;
 
 	@Resource(name = "statoSocioFacade")
-	StatoSocioFacade statoSocioFacade;
+	private StatoSocioFacade statoSocioFacade;
 
 	@Resource(name = "qualitaTitolareFacade")
-	QualitaTitolareFacade qualitaTitolareFacade;
+	private QualitaTitolareFacade qualitaTitolareFacade;
 
 	@Resource(name = "settoreImpresaFacade")
-	SettoreImpresaFacade settoreImpresaFacade;
+	private SettoreImpresaFacade settoreImpresaFacade;
 
 	@Resource(name = "tipoSocietaFacade")
-	TipoSocietaFacade tipoSocietaFacade;
+	private TipoSocietaFacade tipoSocietaFacade;
 
 	@Resource(name = "atecoFacade")
-	AtecoFacade atecoFacede;
+	private AtecoFacade atecoFacede;
 
 	@Resource(name = "finanziamentiFacade")
-	FinanziamentiFacade finanziamentiFacade;
+	private FinanziamentiFacade finanziamentiFacade;
+	
+	@Resource
+	private SociValidator sociValidator;
 
 	@RequestMapping(value = "/elencoSoci", method = RequestMethod.GET)
 	public String elencoSoci(final Model model, final HttpServletRequest request, final HttpServletResponse response) {
@@ -107,6 +110,11 @@ public class SociController {
 			final HttpServletResponse response) {
 
 		try {
+			sociValidator.validate(socio, bindingResult);
+			if(bindingResult.hasErrors()) {
+				model.addAttribute("sociData", socio);
+				return "insertSoci";
+			}
 			int socioId = 0;
 			socioId = sociFacade.getIdSocioByPIva(socio.getPartitaIva());
 			if (socioId == 0) {
@@ -122,7 +130,7 @@ public class SociController {
 						messageSource.getMessage("exist.socio", null, LocaleContextHolder.getLocale()));
 			}
 		} catch (ParseException e) {
-			logger.error("Si è verificato un errore nell'inserimento del socio", e.getCause());
+			logger.error("Si Ã¨ verificato un errore nell'inserimento del socio", e.getCause());
 		}
 
 		setModelPage(model, socio, request.getSession());
@@ -145,7 +153,7 @@ public class SociController {
 			socio = sociFacade.dettaglioSocio(idSocio);
 		} catch (ParseException e) {
 			e.printStackTrace();
-			logger.error("Si è verificato un errore nella lettura del socio", e.getCause());
+			logger.error("Si Ã¨ verificato un errore nella lettura del socio", e.getCause());
 		}
 
 		setModelPage(model, socio, request.getSession());
@@ -166,6 +174,11 @@ public class SociController {
 			final HttpServletResponse response) {
 
 		try {
+			sociValidator.validate(socio, bindingResult);
+			if(bindingResult.hasErrors()) {
+				model.addAttribute("sociData", socio);
+				return "modificaSocio";
+			}
 			if (!(CollectionUtils.isEmpty(idAteco))) {
 				socio.setIdAteco(idAteco);
 			}
