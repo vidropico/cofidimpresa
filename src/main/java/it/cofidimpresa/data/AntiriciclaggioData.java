@@ -13,6 +13,7 @@ public class AntiriciclaggioData {
 	private String luogoRilascio;
 	private String autoritaCompetente;
 	private int idSoci;
+	private String impresa;
 	private int numeroProgressivo;
 	private int flagStampa;
 	private int flagInsCompleto;
@@ -82,6 +83,14 @@ public class AntiriciclaggioData {
 
 	public void setIdSoci(int idSoci) {
 		this.idSoci = idSoci;
+	}
+
+	public String getImpresa() {
+		return impresa;
+	}
+
+	public void setImpresa(String impresa) {
+		this.impresa = impresa;
 	}
 
 	public int getNumeroProgressivo() {

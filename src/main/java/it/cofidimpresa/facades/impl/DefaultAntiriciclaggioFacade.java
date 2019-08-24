@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import it.cofidimpresa.dao.AntiriciclaggioDAO;
 import it.cofidimpresa.dao.FinanziamentiDAO;
+import it.cofidimpresa.dao.SociDAO;
 import it.cofidimpresa.data.AntiriciclaggioData;
 import it.cofidimpresa.data.AntiriciclaggioTmpData;
 import it.cofidimpresa.datamodel.AntiriciclaggioModel;
@@ -21,6 +22,9 @@ public class DefaultAntiriciclaggioFacade implements AntiriciclaggioFacade{
 	
 	@Resource(name="finanziamentiDAO")
 	FinanziamentiDAO finanziamentiDAO;
+	
+	@Resource(name="sociDAO")
+	SociDAO sociDAO;
 	
 	public int inserisciAntiriciclaggio(AntiriciclaggioData antData) {
 		AntiriciclaggioModel antiriciclaggioModel = new AntiriciclaggioModel();
@@ -50,6 +54,7 @@ public class DefaultAntiriciclaggioFacade implements AntiriciclaggioFacade{
 		for (AntiriciclaggioModel antTmpModel : result) {
 			AntiriciclaggioData antData = new AntiriciclaggioData();
 			convertModelToData(antTmpModel,antData);
+			antData.setImpresa(sociDAO.getSocioById(antTmpModel.getIdSoci()).getImpresa());
 			resultData.add(antData);
 		}
 			
@@ -63,6 +68,7 @@ public class DefaultAntiriciclaggioFacade implements AntiriciclaggioFacade{
 		for (AntiriciclaggioModel antTmpModel : result) {
 			AntiriciclaggioData antData = new AntiriciclaggioData();
 			convertModelToData(antTmpModel,antData);
+			antData.setImpresa(sociDAO.getSocioById(antTmpModel.getIdSoci()).getImpresa());
 			resultData.add(antData);
 		}
 			
@@ -75,6 +81,7 @@ public class DefaultAntiriciclaggioFacade implements AntiriciclaggioFacade{
 		for (AntiriciclaggioModel antTmpModel : result) {
 			AntiriciclaggioData antData = new AntiriciclaggioData();
 			convertModelToData(antTmpModel,antData);
+			antData.setImpresa(sociDAO.getSocioById(antTmpModel.getIdSoci()).getImpresa());
 			resultData.add(antData);
 		}
 			

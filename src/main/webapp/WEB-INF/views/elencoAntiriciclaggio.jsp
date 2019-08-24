@@ -16,6 +16,7 @@
 			style="width: 100%">
 			<thead>
 				<tr>
+					<th>IMPRESA</th>
 					<th>NOMINATIVO</th>
 					<th>TIPO DOCUMENTO</th>
 					<th>NUMERO DOCUMENTO</th>
@@ -32,6 +33,7 @@
 			<tbody>
 				<c:forEach var="antiriciclaggio" items="${antiriciclaggioList}">
 					<tr>
+						<td>${antiriciclaggio.impresa}</td>
 						<td>${antiriciclaggio.nominativo}</td>
 						<td>${antiriciclaggio.idDocumento}</td>
 						<td>${antiriciclaggio.numeroDocumento}</td>

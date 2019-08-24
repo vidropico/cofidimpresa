@@ -184,3 +184,6 @@ a:hover {
 		text-indent: 30px;
 	}
 }
+.error{
+	color: red;
+}
