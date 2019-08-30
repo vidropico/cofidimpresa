@@ -38,13 +38,13 @@ public class DefaultSociFacade implements SociFacade {
 
 	@Resource(name = "statoSocioFacade")
 	StatoSocioFacade statoSocioFacade;
-	
-	@Resource(name= "atecoDAO")
+
+	@Resource(name = "atecoDAO")
 	AtecoDAO atecoDAO;
-	
-	@Resource(name="defaultJavaUtils")
+
+	@Resource(name = "defaultJavaUtils")
 	DefaultJavaUtils defaultJavaUtils;
-	
+
 	public int getNumeroSoci() {
 		logger.debug("*** Start getNumeroSoci ");
 		return sociDAO.getNumAllSoci();
@@ -105,50 +105,52 @@ public class DefaultSociFacade implements SociFacade {
 		socio.setIdSoci(idSocio);
 		sociDAO.addStoricoSocio(sociModel, idSocio);
 		if (!CollectionUtils.isEmpty(socio.getIdAteco())) {
-			for (Integer idAteco : socio.getIdAteco()) {
-				sociDAO.addSocioAteco(idAteco.intValue(), idSocio.intValue());
+			if (idSocio.intValue() > 0) {
+				for (Integer idAteco : socio.getIdAteco()) {
+					sociDAO.addSocioAteco(idAteco.intValue(), idSocio.intValue());
+				}
+			}else {
+				logger.info("Id socio per inserimento Ateco non presente");
 			}
 		}
 		return socio;
 	}
-	
+
 	public SociData dettaglioSocio(Integer idSocio) throws ParseException {
 		logger.debug("*** Start dettaglioSocio ");
 		SociModel sociModel = new SociModel();
-		sociModel=sociDAO.getSocioById(idSocio);
+		sociModel = sociDAO.getSocioById(idSocio);
 		SociData socio = new SociData();
 		converterModelToData(sociModel, socio);
-		
+
 		return socio;
 	}
-	
+
 	public SociData modificaSocio(SociData socio) throws ParseException, Exception {
 		logger.debug("*** Start modificaSocio ");
 		SociModel sociModel = new SociModel();
 		converterDataToModel(socio, sociModel);
 		Integer result = sociDAO.updateSocio(sociModel);
-		if(result.intValue()<=0) {
-			throw new Exception("Si è verificato un errore nell'aggiornamento del socio");
+		if (result.intValue() <= 0) {
+			throw new Exception("Si Ã¨ verificato un errore nell'aggiornamento del socio");
 		}
-		Integer idSocio=socio.getIdSoci();
+		Integer idSocio = socio.getIdSoci();
 		if (!CollectionUtils.isEmpty(socio.getIdAteco())) {
 			for (Integer idAteco : socio.getIdAteco()) {
-				if(idAteco!=null) {
-					  sociDAO.addSocioAteco(idAteco.intValue(), idSocio.intValue());
+				if (idAteco != null) {
+					sociDAO.addSocioAteco(idAteco.intValue(), idSocio.intValue());
 				}
 			}
 		}
 		return socio;
 	}
 
-
 	public Integer getIdSocioByPIva(String pIva) throws ParseException {
 		logger.debug("*** Start getIdSocioByPIva");
 		Integer idSocio = 0;
-		idSocio=sociDAO.getIdSocioByPartitaIva(pIva);
+		idSocio = sociDAO.getIdSocioByPartitaIva(pIva);
 		return idSocio;
 	}
-	
 
 	private void converterDataToModel(SociData socio, SociModel sociModel) throws ParseException {
 
@@ -207,11 +209,11 @@ public class DefaultSociFacade implements SociFacade {
 		sociModel.setRea(socio.getRea());
 		sociModel.setTelefono(socio.getTelefono());
 		sociModel.setTipologiaMerceologica(socio.getTipologiaMerceologica());
-		if(socio.getIdSoci()>0) {
+		if (socio.getIdSoci() > 0) {
 			sociModel.setIdSoci(socio.getIdSoci());
 		}
 	}
-	
+
 	private void converterModelToData(SociModel socioModel, SociData socio) throws ParseException {
 
 		socio.setAntiriciclaggio(socioModel.getAntiriciclaggio());
@@ -227,19 +229,19 @@ public class DefaultSociFacade implements SociFacade {
 		socio.setCodiceFiscale(socioModel.getCodiceFiscale());
 		socio.setCodiceFiscaleTitolare(socioModel.getCodiceFiscaleTitolare());
 		socio.setCognome(socioModel.getCognome());
-		if (null!=socioModel.getDataAttivita()) {
+		if (null != socioModel.getDataAttivita()) {
 			socio.setDataAttivita(defaultJavaUtils.convertStringFromDate(socioModel.getDataAttivita()));
 		}
-		if (null!=socioModel.getDataCessazione()) {
+		if (null != socioModel.getDataCessazione()) {
 			socio.setDataCessazione(defaultJavaUtils.convertStringFromDate(socioModel.getDataCessazione()));
 		}
-		if (null!=socioModel.getDataCostituzione()) {
+		if (null != socioModel.getDataCostituzione()) {
 			socio.setDataCostituzione(defaultJavaUtils.convertStringFromDate(socioModel.getDataCostituzione()));
 		}
-		if (null!=socioModel.getDataDiNascita()) {
+		if (null != socioModel.getDataDiNascita()) {
 			socio.setDataDiNascita(defaultJavaUtils.convertStringFromDate(socioModel.getDataDiNascita()));
 		}
-		if (null!=socioModel.getDataInizio()) {
+		if (null != socioModel.getDataInizio()) {
 			socio.setDataInizio(defaultJavaUtils.convertStringFromDate(socioModel.getDataInizio()));
 		}
 		socio.setEmail(socioModel.getEmail());
@@ -269,13 +271,10 @@ public class DefaultSociFacade implements SociFacade {
 		socio.setRea(socioModel.getRea());
 		socio.setTelefono(socioModel.getTelefono());
 		socio.setTipologiaMerceologica(socioModel.getTipologiaMerceologica());
-		if(socioModel.getIdSoci()>0) {
+		if (socioModel.getIdSoci() > 0) {
 			socio.setIdSoci(socioModel.getIdSoci());
 		}
 
 	}
-
-	
-	
 
 }

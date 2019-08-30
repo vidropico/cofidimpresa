@@ -21,7 +21,8 @@
 	
 	<bean id="sociValidator" class="it.cofidimpresa.validator.SociValidator"/>
 	<bean id="insFinanziamentiValidator" class="it.cofidimpresa.validator.InsFinanziamentiValidator"/>
-
+	<bean id="modFinanziamentiValidator" class="it.cofidimpresa.validator.ModFinanziamentiValidator"/>
+	
 	<!-- <mvc:resources mapping="/_ui/**" location="/_ui/" /> -->
 	<mvc:resources location="classpath:/_ui/" mapping="/**" />
 	<mvc:annotation-driven />

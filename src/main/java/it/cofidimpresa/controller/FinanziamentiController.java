@@ -33,6 +33,7 @@ import it.cofidimpresa.facades.FinanziamentiFacade;
 import it.cofidimpresa.facades.SociFacade;
 import it.cofidimpresa.facades.StatoFinanziamentoFacade;
 import it.cofidimpresa.validator.InsFinanziamentiValidator;
+import it.cofidimpresa.validator.ModFinanziamentiValidator;
 
 @Controller
 public class FinanziamentiController {
@@ -62,6 +63,9 @@ public class FinanziamentiController {
 	@Resource
 	private InsFinanziamentiValidator insFinanziamentiValidator;
 
+	@Resource
+	private ModFinanziamentiValidator modFinanziamentiValidator;
+	
 	@RequestMapping(value = "/elencoFinanziamenti", method = RequestMethod.GET)
 	public String elencoFinanziamenti(final Model model, final HttpServletRequest request,
 			final HttpServletResponse response) {
@@ -162,6 +166,11 @@ public class FinanziamentiController {
 		logger.debug("*** insertFinanziamento ***");
 		
 		try {
+			modFinanziamentiValidator.validate(finanziamentiData, bindingResult);
+			if(bindingResult.hasErrors()) {
+				model.addAttribute("finanziamentiData", finanziamentiData);
+				return "modificaFinanziamento";
+			}
 			finanziamentiFacade.updateFinanziamento(finanziamentiData);
 			model.addAttribute("confirmMsg",messageSource.getMessage("insert.finanziamento", null, LocaleContextHolder.getLocale()));
 		} catch (ParseException e) {
