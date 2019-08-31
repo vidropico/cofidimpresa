@@ -39,8 +39,8 @@
 					
 			<div class="row" style="margin-bottom:10px;">		
 				<div class="col-sm-3">
-					<label for="Impresa" style="margin-left: -160px;">Impresa </label><br> 
-					<form:input path="Impresa" value="${impresa}" type="text" readonly/>
+					<label for="Impresa" >Impresa </label><br> 
+					<input name="Impresa" id="impresa" value="${impresa}" type="text" readonly/>
 				</div>
 				<div class="col-sm-3">
 				<label for="idStatoFinanziamenti" >Stato
@@ -198,19 +198,19 @@
 			</div>
 			<div class="row" style="margin-bottom:10px;">		
 				<div class="col-sm-3">				
-				<label for="impQuotaBanca" style="margin-left: -160px;">Quote Socio Banca
+				<label for="impQuotaBanca" >Quote Socio Banca
 				</label><br> <form:input path="impQuotaBanca"
 					value="${finanziamentiData.impQuotaBanca}" type="text"/>
 					<form:errors path="impQuotaBanca" cssClass="error"/>
 				</div>
 				<div class="col-sm-3">				
-				<label for="istruttoriaBanca" style="margin-left: -160px;">Istruttoria Erogata
+				<label for="istruttoriaBanca" >Istruttoria Erogata
 				</label><br> <form:input path="istruttoriaBanca"
 					value="${finanziamentiData.istruttoriaBanca}" type="text"/>
 					<form:errors path="istruttoriaBanca" cssClass="error"/>
 				</div>
 				<div class="col-sm-3">								
-				<label for="flgUsura" style="margin-left: -160px;">Prevenzione Usura</label><br> 
+				<label for="flgUsura">Prevenzione Usura</label><br> 
 				<c:choose>
 				<c:when test="${finanziamentiData.flgUsura eq 0}">
 					<form:select path="flgUsura">
@@ -232,12 +232,12 @@
 			<div id="i11">
 			<div class="row" style="margin-bottom:10px;">		
 				<div class="col-sm-3">				
-				<label for="rateScadute" style="margin-left: -160px;">Rate
+				<label for="rateScadute">Rate
 					Scadute </label><br> <form:input path="rateScadute"
 					value="${finanziamentiData.rateScadute}" type="text"/>
 				</div>
 				<div class="col-sm-3">				
-				<label for="importoScaduto" style="margin-left: -160px;">Importo
+				<label for="importoScaduto">Importo
 					Scaduto</label><br> <form:input path="importoScaduto"
 					value="${finanziamentiData.importoScaduto}" type="text"/>
 				</div>
@@ -245,7 +245,8 @@
 			</div>
 			<div id="i12">
 			<div class="row" style="margin-bottom:10px;">		
-				<div class="col-sm-3">				
+				<div class="col-sm-3">
+				<label for="pagamento">Pagamento</label><br>				
 				<form:select path="pagamento">
 					<c:choose>
 						<c:when test="${finanziamentiData.pagamento eq 0}">
@@ -260,12 +261,12 @@
 				</form:select> 
 				</div>
 				<div class="col-sm-3">				
-				<label for="tipologiaRientro" style="margin-left: -160px;">Tipologia
+				<label for="tipologiaRientro">Tipologia
 					Rientro</label><br> <form:input path="tipologiaRientro"
 					value="${finanziamentiData.tipologiaRientro}" type="text"/>
 				</div>
 				<div class="col-sm-3">				
-				<label for="pianoRientro" style="margin-left: -160px;">Piano
+				<label for="pianoRientro" >Piano
 					di Rientro</label><br> <form:input path="pianoRientro"
 					value="${finanziamentiData.pianoRientro}" type="text"/>
 				</div>
@@ -275,17 +276,17 @@
 			<div id="i13">
 			<div class="row" style="margin-bottom:10px;">		
 				<div class="col-sm-3">				
-				<label for="nomeAvvocato" style="margin-left: -160px;">Affidata
+				<label for="nomeAvvocato" >Affidata
 					all'Avvocato</label><br> <form:input path="nomeAvvocato"
 					value="${finanziamentiData.nomeAvvocato}" type="text"/>
 				</div>
 				<div class="col-sm-3">
-				<label for="azioni" style="margin-left: -160px;">Azioni </label><br> 
+				<label for="azioni" >Azioni </label><br> 
 				<form:input path="azioni" value="${finanziamentiData.azioni}"
 					type="text" />
 				</div>
 				<div class="col-sm-3">
-				<label for="risultato" style="margin-left: -160px;">Risultato
+				<label for="risultato" >Risultato
 				</label><br> <form:input path="risultato"
 					value="${finanziamentiData.pianoRientro}" type="text"/>
 				</div>
