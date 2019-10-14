@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
+import javax.swing.JSpinner.DateEditor;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -44,7 +45,11 @@ public class DefaultGeneraFileCrifDAO implements GeneraFileCrifDAO{
 		try {
 			conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setDate(1, new Date(createDate(dataRiferimentoCrif)));
+			if(dataRiferimentoCrif!=null) {
+				ps.setDate(1, new Date(createDate(dataRiferimentoCrif)));
+			}else {
+				ps.setNull(1, java.sql.Types.DATE);
+			}
 			
 			logger.debug("*** Query ***");
 			logger.debug(ps);
@@ -110,8 +115,16 @@ public class DefaultGeneraFileCrifDAO implements GeneraFileCrifDAO{
 		try {
 			conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setDate(1, new Date(createDate(dateStart)));
-			ps.setDate(2, new Date(createDate(dataEnd)));
+			if (dateStart != null) {
+				ps.setDate(1, new Date(createDate(dateStart)));
+			} else {
+				ps.setNull(1, java.sql.Types.DATE);
+			}
+			if(dataEnd!=null) {
+				ps.setDate(2, new Date(createDate(dataEnd)));
+			}else {
+				ps.setNull(2, java.sql.Types.DATE);
+			}
 			
 			logger.debug("*** Query ***");
 			logger.debug(ps);

@@ -170,11 +170,10 @@ public class DefaultSociDAO implements SociDAO {
 
 			logger.debug("*** Query ***");
 			logger.debug(sql);
-			
+
 			logger.debug("*** Parameter ***");
 			logger.debug(idSocio);
 
-			
 			while (rs.next()) {
 
 				soci.setIdSoci(rs.getInt("ID_SOCI"));
@@ -295,25 +294,23 @@ public class DefaultSociDAO implements SociDAO {
 				+ "PROVINCIA_RESIDENZA, TELEFONO, FAX, MOBILE, EMAIL,"
 				+ "ID_UTENTE, DATA_INIZIO, DATA_CESSAZIONE, INDIRIZZO_SEDE_OPERATIVA,"
 				+ "CITTA_SEDE_OPERATIVA, CAP_SEDE_OPERATIVA, PROVINCIA_SEDE_OPERATIVA,"
-				+ "INDIRIZZO_SEDE_LEGALE, CITTA_SEDE_LEGALE,"
-				+ "CAP_SEDE_LEGALE, PROVINCIA_SEDE_LEGALE,"
+				+ "INDIRIZZO_SEDE_LEGALE, CITTA_SEDE_LEGALE," + "CAP_SEDE_LEGALE, PROVINCIA_SEDE_LEGALE,"
 				+ "TIPOLOGIA_MERCEOLOGICA, DATA_DI_NASCITA, LUOGO_DI_NASCITA,"
 				+ "ID_TIPO_SOCIETA, ID_QUALITA_TITOLARE, CCIAA,"
 				+ "REA, DATA_COSTITUZIONE, DATA_ATTIVITA, NUMERO_DIPENDENTI,"
 				+ "CODICE_FISCALE_TITOLARE, ID_SETTORE_IMPRESA, ID_STATO_SOCIO,"
 				+ "NLIBRO_SOCI,NUMERO_QUOTE,IMPORTO_QUOTE) VALUES ("
-				+ "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?"
-				+ ")";
+				+ "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?" + ")";
 
 		Connection conn = null;
 
 		try {
 			logger.debug("*** Query ***");
 			logger.debug(sql);
-			
+
 			conn = dataSource.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-			
+			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
 			ps.setString(1, sociModel.getNome());
 			ps.setString(2, sociModel.getCognome());
 			ps.setString(3, sociModel.getImpresa());
@@ -332,8 +329,16 @@ public class DefaultSociDAO implements SociDAO {
 			ps.setString(16, sociModel.getMobile());
 			ps.setString(17, sociModel.getEmail());
 			ps.setInt(18, sociModel.getIdUtente());
-			ps.setDate(19, new Date(createDate(sociModel.getDataInizio())));
-			ps.setDate(20, new Date(createDate(sociModel.getDataCessazione())));
+			if (sociModel.getDataInizio() != null) {
+				ps.setDate(19, new Date(createDate(sociModel.getDataInizio())));
+			} else {
+				ps.setNull(19, java.sql.Types.DATE);
+			}
+			if (sociModel.getDataCessazione() != null) {
+				ps.setDate(20, new Date(createDate(sociModel.getDataCessazione())));
+			} else {
+				ps.setNull(20, java.sql.Types.DATE);
+			}
 			ps.setString(21, sociModel.getIndirizzoSedeOperativa());
 			ps.setString(22, sociModel.getCittaSedeOperativa());
 			ps.setString(23, sociModel.getCapSedeOperativa());
@@ -343,14 +348,26 @@ public class DefaultSociDAO implements SociDAO {
 			ps.setString(27, sociModel.getCapSedeLegale());
 			ps.setString(28, sociModel.getProvinciaSedeLegale());
 			ps.setString(29, sociModel.getTipologiaMerceologica());
-			ps.setDate(30, new Date(createDate(sociModel.getDataDiNascita())));
+			if (sociModel.getDataDiNascita() != null) {
+				ps.setDate(30, new Date(createDate(sociModel.getDataDiNascita())));
+			} else {
+				ps.setNull(30, java.sql.Types.DATE);
+			}
 			ps.setString(31, sociModel.getLuogoDiNascita());
 			ps.setInt(32, sociModel.getIdTipoSocieta());
 			ps.setInt(33, sociModel.getIdQualitaTitolare());
 			ps.setString(34, sociModel.getCciaa());
 			ps.setString(35, sociModel.getRea());
-			ps.setDate(36, new Date(createDate(sociModel.getDataCostituzione())));
-			ps.setDate(37, new Date(createDate(sociModel.getDataAttivita())));
+			if (sociModel.getDataCostituzione() != null) {
+				ps.setDate(36, new Date(createDate(sociModel.getDataCostituzione())));
+			} else {
+				ps.setNull(36, java.sql.Types.DATE);
+			}
+			if (sociModel.getDataAttivita() != null) {
+				ps.setDate(37, new Date(createDate(sociModel.getDataAttivita())));
+			} else {
+				ps.setNull(37, java.sql.Types.DATE);
+			}
 			ps.setString(38, sociModel.getNumeroDipendenti());
 			ps.setString(39, sociModel.getCodiceFiscaleTitolare());
 			ps.setInt(40, sociModel.getIdSettoreImpresa());
@@ -358,62 +375,38 @@ public class DefaultSociDAO implements SociDAO {
 			ps.setInt(42, sociModel.getNumeroLibroSoci());
 			ps.setInt(43, sociModel.getNumeroQuote());
 			ps.setDouble(44, sociModel.getImportoQuote());
-			//ps.setInt(45, null);
-			
+			// ps.setInt(45, null);
+
 			logger.debug("Parameter");
-			logger.debug(sociModel.getNome()+","+
-					sociModel.getCognome()+","+
-					sociModel.getImpresa()+","+
-					sociModel.getCodiceFiscale()+","+
-					sociModel.getPartitaIva()+","+
-					sociModel.getIndirizzoAzienda()+","+
-					sociModel.getCittaAzienda()+","+
-					sociModel.getCapAzienda()+","+
-					sociModel.getProvinciaAzienda()+","+
-					sociModel.getIndirizzoResidenza()+","+
-					sociModel.getCittaResidenza()+","+
-					sociModel.getCapResidenza()+","+
-					sociModel.getProvinciaResidenza()+","+
-					sociModel.getTelefono()+","+
-					sociModel.getFax()+","+
-					sociModel.getMobile()+","+
-					sociModel.getEmail()+","+
-					sociModel.getIdUtente()+","+
-					sociModel.getDataInizio()+","+
-					sociModel.getDataCessazione()+","+
-					sociModel.getIndirizzoSedeOperativa()+","+
-					sociModel.getCittaSedeOperativa()+","+
-					sociModel.getCapSedeOperativa()+","+
-					sociModel.getProvinciaSedeOperativa()+","+
-					sociModel.getIndirizzoSedeLegale()+","+
-					sociModel.getCittaSedeLegale()+","+
-					sociModel.getCapSedeLegale()+","+
-					sociModel.getProvinciaSedeLegale()+","+
-					sociModel.getTipologiaMerceologica()+","+
-					sociModel.getDataDiNascita()+","+
-					sociModel.getLuogoDiNascita()+","+
-					sociModel.getIdTipoSocieta()+","+
-					sociModel.getIdQualitaTitolare()+","+
-					sociModel.getCciaa()+","+
-					sociModel.getRea()+","+
-					sociModel.getDataCostituzione()+","+
-					sociModel.getDataAttivita()+","+
-					sociModel.getNumeroDipendenti()+","+
-					sociModel.getCodiceFiscaleTitolare()+","+
-					sociModel.getIdSettoreImpresa()+","+
-					sociModel.getIdStatoSocio()+","+
-					sociModel.getNumeroLibroSoci()+","+
-					sociModel.getNumeroQuote()+","+
-					sociModel.getImportoQuote());
+			logger.debug(sociModel.getNome() + "," + sociModel.getCognome() + "," + sociModel.getImpresa() + ","
+					+ sociModel.getCodiceFiscale() + "," + sociModel.getPartitaIva() + ","
+					+ sociModel.getIndirizzoAzienda() + "," + sociModel.getCittaAzienda() + ","
+					+ sociModel.getCapAzienda() + "," + sociModel.getProvinciaAzienda() + ","
+					+ sociModel.getIndirizzoResidenza() + "," + sociModel.getCittaResidenza() + ","
+					+ sociModel.getCapResidenza() + "," + sociModel.getProvinciaResidenza() + ","
+					+ sociModel.getTelefono() + "," + sociModel.getFax() + "," + sociModel.getMobile() + ","
+					+ sociModel.getEmail() + "," + sociModel.getIdUtente() + "," + sociModel.getDataInizio() + ","
+					+ sociModel.getDataCessazione() + "," + sociModel.getIndirizzoSedeOperativa() + ","
+					+ sociModel.getCittaSedeOperativa() + "," + sociModel.getCapSedeOperativa() + ","
+					+ sociModel.getProvinciaSedeOperativa() + "," + sociModel.getIndirizzoSedeLegale() + ","
+					+ sociModel.getCittaSedeLegale() + "," + sociModel.getCapSedeLegale() + ","
+					+ sociModel.getProvinciaSedeLegale() + "," + sociModel.getTipologiaMerceologica() + ","
+					+ sociModel.getDataDiNascita() + "," + sociModel.getLuogoDiNascita() + ","
+					+ sociModel.getIdTipoSocieta() + "," + sociModel.getIdQualitaTitolare() + "," + sociModel.getCciaa()
+					+ "," + sociModel.getRea() + "," + sociModel.getDataCostituzione() + ","
+					+ sociModel.getDataAttivita() + "," + sociModel.getNumeroDipendenti() + ","
+					+ sociModel.getCodiceFiscaleTitolare() + "," + sociModel.getIdSettoreImpresa() + ","
+					+ sociModel.getIdStatoSocio() + "," + sociModel.getNumeroLibroSoci() + ","
+					+ sociModel.getNumeroQuote() + "," + sociModel.getImportoQuote());
 			ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
-			Integer idSocio =-1;
-			if(rs.next()) {
+			Integer idSocio = -1;
+			if (rs.next()) {
 				idSocio = rs.getInt("GENERATED_KEY");
-			}else {
+			} else {
 				throw new SQLException("Error to insert row");
 			}
-			
+
 			rs.close();
 			ps.close();
 			logger.debug("*** End addSocio ***");
@@ -432,7 +425,7 @@ public class DefaultSociDAO implements SociDAO {
 		}
 
 	}
-	
+
 	public void addStoricoSocio(SociModel sociModel, Integer idSocio) {
 		logger.debug("*** Start addStoricoSocio ***");
 		String sql = "INSERT INTO storico_soci (ID_UTENTE, OLD_VALUE, NEW_VALUE, "
@@ -443,21 +436,21 @@ public class DefaultSociDAO implements SociDAO {
 		try {
 			logger.debug("*** Query ***");
 			logger.debug(sql);
-			
+
 			conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, sociModel.getIdUtente());
 			ps.setString(2, StringUtils.EMPTY);
 			ps.setString(3, "Registrato nuovo socio");
 			ps.setInt(4, idSocio);
-			
+
 			logger.debug("Parameter");
 			logger.debug(ps.getParameterMetaData());
 			ps.executeUpdate();
-			
+
 			ps.close();
 			logger.debug("*** End addStoricoSocio ***");
-			//return result;
+			// return result;
 		} catch (SQLException e) {
 			logger.error("Exception: ", e);
 			throw new RuntimeException(e);
@@ -472,7 +465,7 @@ public class DefaultSociDAO implements SociDAO {
 		}
 
 	}
-	
+
 	public void addSocioAteco(int idAteco, int idSocio) {
 		logger.debug("*** Start addSocioAteco ***");
 		String sql = "INSERT INTO socio_ateco (ID_SOCIO, ID_ATECO) VALUES (?,?)";
@@ -482,20 +475,20 @@ public class DefaultSociDAO implements SociDAO {
 		try {
 			logger.debug("*** Query ***");
 			logger.debug(sql);
-			
+
 			conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, idSocio);
 			ps.setInt(2, idAteco);
-			
+
 			logger.debug("Parameter");
 			logger.debug(ps.getParameterMetaData());
-			
+
 			ps.executeUpdate();
 
 			ps.close();
 			logger.debug("*** End addSocioAteco ***");
-			//return result;
+			// return result;
 		} catch (SQLException e) {
 			logger.error("Exception: ", e);
 			throw new RuntimeException(e);
@@ -513,53 +506,18 @@ public class DefaultSociDAO implements SociDAO {
 
 	public Integer updateSocio(SociModel sociModel) {
 		logger.debug("*** Start updateSocio ***");
-		String sql = 
-				"UPDATE soci SET "
-				+ "NOME = ?,"
-				+ "COGNOME = ?,"
-				+ "IMPRESA = ?,"
-				+ "CODICE_FISCALE = ?,"
-				+ "PARTITA_IVA = ?, "
-				+ "INDIRIZZO_AZIENDA = ?,"
-				+ "CITTA_AZIENDA = ?,"
-				+ "CAP_AZIENDA = ?,"
-				+ "PROVINCIA_AZIENDA = ?,"
-				+ "INDIRIZZO_RESIDENZA = ?,"
-				+ "CITTA_RESIDENZA = ?,"
-				+ "CAP_RESIDENZA = ?,"
-				+ "PROVINCIA_RESIDENZA = ?,"
-				+ "TELEFONO = ?,"
-				+ "FAX = ?,"
-				+ "MOBILE = ?,"
-				+ "EMAIL = ?,"
-				+ "ID_UTENTE= ?,"
-				+ "DATA_INIZIO = ?,"
-				+ "DATA_CESSAZIONE = ?,"
-				+ "INDIRIZZO_SEDE_OPERATIVA = ?,"
-				+ "CITTA_SEDE_OPERATIVA = ?,"
-				+ "CAP_SEDE_OPERATIVA = ?,"
-				+ "PROVINCIA_SEDE_OPERATIVA = ?,"
-				+ "INDIRIZZO_SEDE_LEGALE = ?,"
-				+ "CITTA_SEDE_LEGALE = ?,"
-				+ "CAP_SEDE_LEGALE = ?,"
-				+ "PROVINCIA_SEDE_LEGALE = ?,"
-				+ "TIPOLOGIA_MERCEOLOGICA = ?,"
-				+ "DATA_DI_NASCITA = ?,"
-				+ "LUOGO_DI_NASCITA = ?,"
-				+ "ID_TIPO_SOCIETA = ?,"
-				+ "ID_QUALITA_TITOLARE = ?,"
-				+ "CCIAA = ?,"
-				+ "REA = ?,"
-				+ "DATA_COSTITUZIONE = ?,"
-				+ "DATA_ATTIVITA = ?,"
-				+ "NUMERO_DIPENDENTI = ?,"
-				+ "CODICE_FISCALE_TITOLARE = ?,"
-				+ "ID_SETTORE_IMPRESA = ?,"
-				+ "ID_STATO_SOCIO = ?,"
-				+ "NLIBRO_SOCI = ?,"
-				+ "NUMERO_QUOTE = ?,"
-				+ "IMPORTO_QUOTE = ?,"
-				+ "ANTIRICICLAGGIO = ?"
+		String sql = "UPDATE soci SET " + "NOME = ?," + "COGNOME = ?," + "IMPRESA = ?," + "CODICE_FISCALE = ?,"
+				+ "PARTITA_IVA = ?, " + "INDIRIZZO_AZIENDA = ?," + "CITTA_AZIENDA = ?," + "CAP_AZIENDA = ?,"
+				+ "PROVINCIA_AZIENDA = ?," + "INDIRIZZO_RESIDENZA = ?," + "CITTA_RESIDENZA = ?," + "CAP_RESIDENZA = ?,"
+				+ "PROVINCIA_RESIDENZA = ?," + "TELEFONO = ?," + "FAX = ?," + "MOBILE = ?," + "EMAIL = ?,"
+				+ "ID_UTENTE= ?," + "DATA_INIZIO = ?," + "DATA_CESSAZIONE = ?," + "INDIRIZZO_SEDE_OPERATIVA = ?,"
+				+ "CITTA_SEDE_OPERATIVA = ?," + "CAP_SEDE_OPERATIVA = ?," + "PROVINCIA_SEDE_OPERATIVA = ?,"
+				+ "INDIRIZZO_SEDE_LEGALE = ?," + "CITTA_SEDE_LEGALE = ?," + "CAP_SEDE_LEGALE = ?,"
+				+ "PROVINCIA_SEDE_LEGALE = ?," + "TIPOLOGIA_MERCEOLOGICA = ?," + "DATA_DI_NASCITA = ?,"
+				+ "LUOGO_DI_NASCITA = ?," + "ID_TIPO_SOCIETA = ?," + "ID_QUALITA_TITOLARE = ?," + "CCIAA = ?,"
+				+ "REA = ?," + "DATA_COSTITUZIONE = ?," + "DATA_ATTIVITA = ?," + "NUMERO_DIPENDENTI = ?,"
+				+ "CODICE_FISCALE_TITOLARE = ?," + "ID_SETTORE_IMPRESA = ?," + "ID_STATO_SOCIO = ?,"
+				+ "NLIBRO_SOCI = ?," + "NUMERO_QUOTE = ?," + "IMPORTO_QUOTE = ?," + "ANTIRICICLAGGIO = ?"
 				+ " WHERE ID_SOCI =?";
 
 		Connection conn = null;
@@ -567,10 +525,10 @@ public class DefaultSociDAO implements SociDAO {
 		try {
 			logger.debug("*** Query ***");
 			logger.debug(sql);
-			
+
 			conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
-			
+
 			ps.setString(1, sociModel.getNome());
 			ps.setString(2, sociModel.getCognome());
 			ps.setString(3, sociModel.getImpresa());
@@ -589,8 +547,16 @@ public class DefaultSociDAO implements SociDAO {
 			ps.setString(16, sociModel.getMobile());
 			ps.setString(17, sociModel.getEmail());
 			ps.setInt(18, sociModel.getIdUtente());
-			ps.setDate(19, new Date(createDate(sociModel.getDataInizio())));
-			ps.setDate(20, new Date(createDate(sociModel.getDataCessazione())));
+			if (sociModel.getDataInizio() != null) {
+				ps.setDate(19, new Date(createDate(sociModel.getDataInizio())));
+			} else {
+				ps.setNull(19, java.sql.Types.DATE);
+			}
+			if (sociModel.getDataCessazione() != null) {
+				ps.setDate(20, new Date(createDate(sociModel.getDataCessazione())));
+			} else {
+				ps.setNull(20, java.sql.Types.DATE);
+			}
 			ps.setString(21, sociModel.getIndirizzoSedeOperativa());
 			ps.setString(22, sociModel.getCittaSedeOperativa());
 			ps.setString(23, sociModel.getCapSedeOperativa());
@@ -600,14 +566,26 @@ public class DefaultSociDAO implements SociDAO {
 			ps.setString(27, sociModel.getCapSedeLegale());
 			ps.setString(28, sociModel.getProvinciaSedeLegale());
 			ps.setString(29, sociModel.getTipologiaMerceologica());
-			ps.setDate(30, new Date(createDate(sociModel.getDataDiNascita())));
+			if (sociModel.getDataDiNascita() != null) {
+				ps.setDate(30, new Date(createDate(sociModel.getDataDiNascita())));
+			} else {
+				ps.setNull(30, java.sql.Types.DATE);
+			}
 			ps.setString(31, sociModel.getLuogoDiNascita());
 			ps.setInt(32, sociModel.getIdTipoSocieta());
 			ps.setInt(33, sociModel.getIdQualitaTitolare());
 			ps.setString(34, sociModel.getCciaa());
 			ps.setString(35, sociModel.getRea());
-			ps.setDate(36, new Date(createDate(sociModel.getDataCostituzione())));
-			ps.setDate(37, new Date(createDate(sociModel.getDataAttivita())));
+			if (sociModel.getDataCostituzione() != null) {
+				ps.setDate(36, new Date(createDate(sociModel.getDataCostituzione())));
+			} else {
+				ps.setNull(36, java.sql.Types.DATE);
+			}
+			if (sociModel.getDataAttivita() != null) {
+				ps.setDate(37, new Date(createDate(sociModel.getDataAttivita())));
+			} else {
+				ps.setNull(37, java.sql.Types.DATE);
+			}
 			ps.setString(38, sociModel.getNumeroDipendenti());
 			ps.setString(39, sociModel.getCodiceFiscaleTitolare());
 			ps.setInt(40, sociModel.getIdSettoreImpresa());
@@ -617,61 +595,36 @@ public class DefaultSociDAO implements SociDAO {
 			ps.setDouble(44, sociModel.getImportoQuote());
 			ps.setInt(45, sociModel.getAntiriciclaggio());
 			ps.setInt(46, sociModel.getIdSoci());
-			
+
 			logger.debug("Parameter");
-			logger.debug(sociModel.getNome()+","+
-					sociModel.getCognome()+","+
-					sociModel.getImpresa()+","+
-					sociModel.getCodiceFiscale()+","+
-					sociModel.getPartitaIva()+","+
-					sociModel.getIndirizzoAzienda()+","+
-					sociModel.getCittaAzienda()+","+
-					sociModel.getCapAzienda()+","+
-					sociModel.getProvinciaAzienda()+","+
-					sociModel.getIndirizzoResidenza()+","+
-					sociModel.getCittaResidenza()+","+
-					sociModel.getCapResidenza()+","+
-					sociModel.getProvinciaResidenza()+","+
-					sociModel.getTelefono()+","+
-					sociModel.getFax()+","+
-					sociModel.getMobile()+","+
-					sociModel.getEmail()+","+
-					sociModel.getIdUtente()+","+
-					sociModel.getDataInizio()+","+
-					sociModel.getDataCessazione()+","+
-					sociModel.getIndirizzoSedeOperativa()+","+
-					sociModel.getCittaSedeOperativa()+","+
-					sociModel.getCapSedeOperativa()+","+
-					sociModel.getProvinciaSedeOperativa()+","+
-					sociModel.getIndirizzoSedeLegale()+","+
-					sociModel.getCittaSedeLegale()+","+
-					sociModel.getCapSedeLegale()+","+
-					sociModel.getProvinciaSedeLegale()+","+
-					sociModel.getTipologiaMerceologica()+","+
-					sociModel.getDataDiNascita()+","+
-					sociModel.getLuogoDiNascita()+","+
-					sociModel.getIdTipoSocieta()+","+
-					sociModel.getIdQualitaTitolare()+","+
-					sociModel.getCciaa()+","+
-					sociModel.getRea()+","+
-					sociModel.getDataCostituzione()+","+
-					sociModel.getDataAttivita()+","+
-					sociModel.getNumeroDipendenti()+","+
-					sociModel.getCodiceFiscaleTitolare()+","+
-					sociModel.getIdSettoreImpresa()+","+
-					sociModel.getIdStatoSocio()+","+
-					sociModel.getNumeroLibroSoci()+","+
-					sociModel.getNumeroQuote()+","+
-					sociModel.getImportoQuote()+","+
-					sociModel.getAntiriciclaggio()+","+
-					sociModel.getIdSoci());
-			
+			logger.debug(sociModel.getNome() + "," + sociModel.getCognome() + "," + sociModel.getImpresa() + ","
+					+ sociModel.getCodiceFiscale() + "," + sociModel.getPartitaIva() + ","
+					+ sociModel.getIndirizzoAzienda() + "," + sociModel.getCittaAzienda() + ","
+					+ sociModel.getCapAzienda() + "," + sociModel.getProvinciaAzienda() + ","
+					+ sociModel.getIndirizzoResidenza() + "," + sociModel.getCittaResidenza() + ","
+					+ sociModel.getCapResidenza() + "," + sociModel.getProvinciaResidenza() + ","
+					+ sociModel.getTelefono() + "," + sociModel.getFax() + "," + sociModel.getMobile() + ","
+					+ sociModel.getEmail() + "," + sociModel.getIdUtente() + "," + sociModel.getDataInizio() + ","
+					+ sociModel.getDataCessazione() + "," + sociModel.getIndirizzoSedeOperativa() + ","
+					+ sociModel.getCittaSedeOperativa() + "," + sociModel.getCapSedeOperativa() + ","
+					+ sociModel.getProvinciaSedeOperativa() + "," + sociModel.getIndirizzoSedeLegale() + ","
+					+ sociModel.getCittaSedeLegale() + "," + sociModel.getCapSedeLegale() + ","
+					+ sociModel.getProvinciaSedeLegale() + "," + sociModel.getTipologiaMerceologica() + ","
+					+ sociModel.getDataDiNascita() + "," + sociModel.getLuogoDiNascita() + ","
+					+ sociModel.getIdTipoSocieta() + "," + sociModel.getIdQualitaTitolare() + "," + sociModel.getCciaa()
+					+ "," + sociModel.getRea() + "," + sociModel.getDataCostituzione() + ","
+					+ sociModel.getDataAttivita() + "," + sociModel.getNumeroDipendenti() + ","
+					+ sociModel.getCodiceFiscaleTitolare() + "," + sociModel.getIdSettoreImpresa() + ","
+					+ sociModel.getIdStatoSocio() + "," + sociModel.getNumeroLibroSoci() + ","
+					+ sociModel.getNumeroQuote() + "," + sociModel.getImportoQuote() + ","
+					+ sociModel.getAntiriciclaggio() + "," + sociModel.getIdSoci());
+
 			logger.debug("*** Prepared Statement ***");
 			logger.debug(ps);
 			logger.debug(ps.toString());
-			
+
 			int result = ps.executeUpdate();
-			
+
 			ps.close();
 			logger.debug("*** End addSocio ***");
 			return result;
@@ -688,7 +641,7 @@ public class DefaultSociDAO implements SociDAO {
 			}
 		}
 	}
-	
+
 	public Integer getIdSocioByPartitaIva(String pIva) {
 		logger.debug("*** Start getIdSocioByPartitaIva ***");
 		String sql = "SELECT  * FROM soci WHERE PARTITA_IVA=?";
@@ -700,15 +653,15 @@ public class DefaultSociDAO implements SociDAO {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, pIva);
 			ResultSet rs = ps.executeQuery();
-			
+
 			logger.debug("*** Query ***");
 			logger.debug(ps);
-			
-			Integer idSocio=new Integer(0);
-						
+
+			Integer idSocio = new Integer(0);
+
 			while (rs.next()) {
 
-				idSocio=rs.getInt("ID_SOCI");
+				idSocio = rs.getInt("ID_SOCI");
 			}
 
 			rs.close();
@@ -728,8 +681,9 @@ public class DefaultSociDAO implements SociDAO {
 			}
 		}
 	}
+
 	private Long createDate(java.util.Date date) {
-		if (date!=null)
+		if (date != null)
 			return date.getTime();
 		return null;
 	}

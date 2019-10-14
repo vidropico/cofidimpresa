@@ -334,10 +334,18 @@ public class DefaultFinanziamentiDAO implements FinanziamentiDAO {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, fin.getImporto());
 			ps.setString(2, fin.getRate());
-			ps.setDate(3, new Date(createDate(fin.getDataApprovazioneConsiglio())));
+			if (fin.getDataApprovazioneConsiglio() != null) {
+				ps.setDate(3, new Date(createDate(fin.getDataApprovazioneConsiglio())));
+			} else {
+				ps.setNull(3, java.sql.Types.DATE);
+			}
+			if(fin.getDataErogazioneFinanziamento()!=null) {
 			ps.setDate(4, new Date(createDate(fin.getDataErogazioneFinanziamento())));
+			}else {
+				ps.setNull(4, java.sql.Types.DATE);
+			}
 			ps.setInt(5, fin.getIdSoci());
-			ps.setInt(6,fin.getIdUtente());
+			ps.setInt(6, fin.getIdUtente());
 			ps.setString(7, fin.getPercentualeGaranzia());
 			ps.setString(8, fin.getImportoRata());
 			ps.setString(9, fin.getCosti());
@@ -353,7 +361,11 @@ public class DefaultFinanziamentiDAO implements FinanziamentiDAO {
 			ps.setString(19, fin.getNomeAvvocato());
 			ps.setString(20, fin.getAzioni());
 			ps.setString(21, fin.getRisultato());
-			ps.setDate(22, new Date(createDate(fin.getDataFineFinanziamento())));
+			if(fin.getDataFineFinanziamento()!=null) {
+				ps.setDate(22, new Date(createDate(fin.getDataFineFinanziamento())));
+			}else {
+				ps.setNull(22, java.sql.Types.DATE);
+			}
 			ps.setString(23, fin.getImportoRichiesto());
 			ps.setInt(24, fin.getIdGaranzia());
 			ps.setDouble(25, fin.getCostoIstruttoria());
@@ -364,12 +376,12 @@ public class DefaultFinanziamentiDAO implements FinanziamentiDAO {
 			ps.setString(30, fin.getImpQuotaBanca());
 			ps.setString(31, fin.getIstruttoriaBanca());
 			ps.setInt(32, fin.getFlgUsura());
-			
+
 			logger.debug("*** Query ***");
 			logger.debug(ps);
-			
+
 			int result = ps.executeUpdate();
-			
+
 			ps.close();
 			logger.debug("*** End insertFinanziamento ***");
 			return result;
@@ -387,48 +399,22 @@ public class DefaultFinanziamentiDAO implements FinanziamentiDAO {
 		}
 	}
 
-	private Long createDate(Date date) {
-		if (date!=null)
+	private Long createDate(java.util.Date date) {
+		if (date != null)
 			return date.getTime();
 		return null;
 	}
 
 	public int updateFinanziamento(FinanziamentiModel fin) {
 		logger.debug("*** Start updateFinanziamento ***");
-		String sql = "UPDATE finanziamenti SET "
-				+ "IMPORTO=?, "
-				+ "RATE=?, "
-				+ "DATA_APPROVAZIONE_CONSIGLIO=?,"
-				+ "DATA_EROGAZIONE_FINANZIAMENTO=?,"
-				+ "ID_SOCI=?,"
-				+ "ID_UTENTE=?,"
-				+ "PERCENTUALE_GARANZIA=?,"
-				+ "IMPORTO_RATA=?,"
-				+ "COSTI=?,"
-				+ "NATURA_FINANZIAMENTO=?,"
-				+ "NOTE=?,"
-				+ "ID_STATO_FINANZIAMENTI=?,"
-				+ "ID_BANCHE=?,"
-				+ "RATE_SCADUTE=?,"
-				+ "IMPORTO_SCADUTO=?,"
-				+ "PAGAMENTO=?,"
-				+ "TIPOLOGIA_RIENTRO=?,"
-				+ "PIANO_RIENTRO=?,"
-				+ "NOME_AVVOCATO=?,"
-				+ "AZIONI=?,"
-				+ "RISULTATO=?,"
-				+ "DATA_FINE_FINANZIAMENTO=?,"
-				+ "IMPORTO_RICHIESTO=?,"
-				+ "ID_GARANZIA=?,"
-				+ "COSTO_ISTRUTTORIA=?,"
-				+ "IMPORTO_DELIBERATO=?,"
-				+ "IMPORTO_GARANZIA=?,"
-				+ "RATE_RICHIESTE=?,"
-				+" ACCREDITO=?,"
-				+ "IMP_QUOTE_BANCA=?,"
-				+ "ISTRUTTORIA_BANCA=?,"
-				+ "FLG_USURA=? "
-				+ "WHERE ID_FINANZIAMENTI=?";
+		String sql = "UPDATE finanziamenti SET " + "IMPORTO=?, " + "RATE=?, " + "DATA_APPROVAZIONE_CONSIGLIO=?,"
+				+ "DATA_EROGAZIONE_FINANZIAMENTO=?," + "ID_SOCI=?," + "ID_UTENTE=?," + "PERCENTUALE_GARANZIA=?,"
+				+ "IMPORTO_RATA=?," + "COSTI=?," + "NATURA_FINANZIAMENTO=?," + "NOTE=?," + "ID_STATO_FINANZIAMENTI=?,"
+				+ "ID_BANCHE=?," + "RATE_SCADUTE=?," + "IMPORTO_SCADUTO=?," + "PAGAMENTO=?," + "TIPOLOGIA_RIENTRO=?,"
+				+ "PIANO_RIENTRO=?," + "NOME_AVVOCATO=?," + "AZIONI=?," + "RISULTATO=?," + "DATA_FINE_FINANZIAMENTO=?,"
+				+ "IMPORTO_RICHIESTO=?," + "ID_GARANZIA=?," + "COSTO_ISTRUTTORIA=?," + "IMPORTO_DELIBERATO=?,"
+				+ "IMPORTO_GARANZIA=?," + "RATE_RICHIESTE=?," + " ACCREDITO=?," + "IMP_QUOTE_BANCA=?,"
+				+ "ISTRUTTORIA_BANCA=?," + "FLG_USURA=? " + "WHERE ID_FINANZIAMENTI=?";
 
 		Connection conn = null;
 
@@ -437,10 +423,18 @@ public class DefaultFinanziamentiDAO implements FinanziamentiDAO {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, fin.getImporto());
 			ps.setString(2, fin.getRate());
-			ps.setDate(3, new Date(createDate(fin.getDataApprovazioneConsiglio())));
+			if (fin.getDataApprovazioneConsiglio() != null) {
+				ps.setDate(3, new Date(createDate(fin.getDataApprovazioneConsiglio())));
+			} else {
+				ps.setNull(3, java.sql.Types.DATE);
+			}
+			if(fin.getDataErogazioneFinanziamento()!=null) {
 			ps.setDate(4, new Date(createDate(fin.getDataErogazioneFinanziamento())));
+			}else {
+				ps.setNull(4, java.sql.Types.DATE);
+			}
 			ps.setInt(5, fin.getIdSoci());
-			ps.setInt(6,fin.getIdUtente());
+			ps.setInt(6, fin.getIdUtente());
 			ps.setString(7, fin.getPercentualeGaranzia());
 			ps.setString(8, fin.getImportoRata());
 			ps.setString(9, fin.getCosti());
@@ -456,24 +450,28 @@ public class DefaultFinanziamentiDAO implements FinanziamentiDAO {
 			ps.setString(19, fin.getNomeAvvocato());
 			ps.setString(20, fin.getAzioni());
 			ps.setString(21, fin.getRisultato());
-			ps.setDate(22, new Date(createDate(fin.getDataFineFinanziamento())));
+			if(fin.getDataFineFinanziamento()!=null) {
+				ps.setDate(22, new Date(createDate(fin.getDataFineFinanziamento())));
+			}else {
+				ps.setNull(22, java.sql.Types.DATE);
+			}
 			ps.setString(23, fin.getImportoRichiesto());
 			ps.setInt(24, fin.getIdGaranzia());
 			ps.setDouble(25, fin.getCostoIstruttoria());
 			ps.setInt(26, fin.getImportoDeliberato());
 			ps.setDouble(27, fin.getImportoGaranzia());
-			ps.setString(28, fin.getRateRichieste());			
+			ps.setString(28, fin.getRateRichieste());
 			ps.setString(29, fin.getAccredito());
 			ps.setString(30, fin.getImpQuotaBanca());
 			ps.setString(31, fin.getIstruttoriaBanca());
 			ps.setInt(32, fin.getFlgUsura());
 			ps.setInt(33, fin.getIdFinanziamenti());
-			
+
 			logger.debug("*** Query ***");
 			logger.debug(ps);
-			
+
 			int result = ps.executeUpdate();
-			
+
 			ps.close();
 			logger.debug("*** End updateFinanziamento ***");
 			return result;
