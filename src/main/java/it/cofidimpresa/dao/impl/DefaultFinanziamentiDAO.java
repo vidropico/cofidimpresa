@@ -334,8 +334,8 @@ public class DefaultFinanziamentiDAO implements FinanziamentiDAO {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, fin.getImporto());
 			ps.setString(2, fin.getRate());
-			ps.setDate(3, new Date(fin.getDataApprovazioneConsiglio().getTime()));
-			ps.setDate(4, new Date(fin.getDataErogazioneFinanziamento().getTime()));
+			ps.setDate(3, new Date(createDate(fin.getDataApprovazioneConsiglio())));
+			ps.setDate(4, new Date(createDate(fin.getDataErogazioneFinanziamento())));
 			ps.setInt(5, fin.getIdSoci());
 			ps.setInt(6,fin.getIdUtente());
 			ps.setString(7, fin.getPercentualeGaranzia());
@@ -353,7 +353,7 @@ public class DefaultFinanziamentiDAO implements FinanziamentiDAO {
 			ps.setString(19, fin.getNomeAvvocato());
 			ps.setString(20, fin.getAzioni());
 			ps.setString(21, fin.getRisultato());
-			ps.setDate(22, new Date(fin.getDataFineFinanziamento().getTime()));
+			ps.setDate(22, new Date(createDate(fin.getDataFineFinanziamento())));
 			ps.setString(23, fin.getImportoRichiesto());
 			ps.setInt(24, fin.getIdGaranzia());
 			ps.setDouble(25, fin.getCostoIstruttoria());
@@ -385,6 +385,12 @@ public class DefaultFinanziamentiDAO implements FinanziamentiDAO {
 				}
 			}
 		}
+	}
+
+	private Long createDate(Date date) {
+		if (date!=null)
+			return date.getTime();
+		return null;
 	}
 
 	public int updateFinanziamento(FinanziamentiModel fin) {
@@ -431,8 +437,8 @@ public class DefaultFinanziamentiDAO implements FinanziamentiDAO {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, fin.getImporto());
 			ps.setString(2, fin.getRate());
-			ps.setDate(3, new Date(fin.getDataApprovazioneConsiglio().getTime()));
-			ps.setDate(4, new Date(fin.getDataErogazioneFinanziamento().getTime()));
+			ps.setDate(3, new Date(createDate(fin.getDataApprovazioneConsiglio())));
+			ps.setDate(4, new Date(createDate(fin.getDataErogazioneFinanziamento())));
 			ps.setInt(5, fin.getIdSoci());
 			ps.setInt(6,fin.getIdUtente());
 			ps.setString(7, fin.getPercentualeGaranzia());
@@ -450,7 +456,7 @@ public class DefaultFinanziamentiDAO implements FinanziamentiDAO {
 			ps.setString(19, fin.getNomeAvvocato());
 			ps.setString(20, fin.getAzioni());
 			ps.setString(21, fin.getRisultato());
-			ps.setDate(22, new Date(fin.getDataFineFinanziamento().getTime()));
+			ps.setDate(22, new Date(createDate(fin.getDataFineFinanziamento())));
 			ps.setString(23, fin.getImportoRichiesto());
 			ps.setInt(24, fin.getIdGaranzia());
 			ps.setDouble(25, fin.getCostoIstruttoria());

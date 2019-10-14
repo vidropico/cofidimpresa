@@ -332,8 +332,8 @@ public class DefaultSociDAO implements SociDAO {
 			ps.setString(16, sociModel.getMobile());
 			ps.setString(17, sociModel.getEmail());
 			ps.setInt(18, sociModel.getIdUtente());
-			ps.setDate(19, new Date(sociModel.getDataInizio().getTime()));
-			ps.setDate(20, new Date(sociModel.getDataCessazione().getTime()));
+			ps.setDate(19, new Date(createDate(sociModel.getDataInizio())));
+			ps.setDate(20, new Date(createDate(sociModel.getDataCessazione())));
 			ps.setString(21, sociModel.getIndirizzoSedeOperativa());
 			ps.setString(22, sociModel.getCittaSedeOperativa());
 			ps.setString(23, sociModel.getCapSedeOperativa());
@@ -343,14 +343,14 @@ public class DefaultSociDAO implements SociDAO {
 			ps.setString(27, sociModel.getCapSedeLegale());
 			ps.setString(28, sociModel.getProvinciaSedeLegale());
 			ps.setString(29, sociModel.getTipologiaMerceologica());
-			ps.setDate(30, new Date(sociModel.getDataDiNascita().getTime()));
+			ps.setDate(30, new Date(createDate(sociModel.getDataDiNascita())));
 			ps.setString(31, sociModel.getLuogoDiNascita());
 			ps.setInt(32, sociModel.getIdTipoSocieta());
 			ps.setInt(33, sociModel.getIdQualitaTitolare());
 			ps.setString(34, sociModel.getCciaa());
 			ps.setString(35, sociModel.getRea());
-			ps.setDate(36, new Date(sociModel.getDataCostituzione().getTime()));
-			ps.setDate(37, new Date(sociModel.getDataAttivita().getTime()));
+			ps.setDate(36, new Date(createDate(sociModel.getDataCostituzione())));
+			ps.setDate(37, new Date(createDate(sociModel.getDataAttivita())));
 			ps.setString(38, sociModel.getNumeroDipendenti());
 			ps.setString(39, sociModel.getCodiceFiscaleTitolare());
 			ps.setInt(40, sociModel.getIdSettoreImpresa());
@@ -589,8 +589,8 @@ public class DefaultSociDAO implements SociDAO {
 			ps.setString(16, sociModel.getMobile());
 			ps.setString(17, sociModel.getEmail());
 			ps.setInt(18, sociModel.getIdUtente());
-			ps.setDate(19, new Date(sociModel.getDataInizio().getTime()));
-			ps.setDate(20, new Date(sociModel.getDataCessazione().getTime()));
+			ps.setDate(19, new Date(createDate(sociModel.getDataInizio())));
+			ps.setDate(20, new Date(createDate(sociModel.getDataCessazione())));
 			ps.setString(21, sociModel.getIndirizzoSedeOperativa());
 			ps.setString(22, sociModel.getCittaSedeOperativa());
 			ps.setString(23, sociModel.getCapSedeOperativa());
@@ -600,14 +600,14 @@ public class DefaultSociDAO implements SociDAO {
 			ps.setString(27, sociModel.getCapSedeLegale());
 			ps.setString(28, sociModel.getProvinciaSedeLegale());
 			ps.setString(29, sociModel.getTipologiaMerceologica());
-			ps.setDate(30, new Date(sociModel.getDataDiNascita().getTime()));
+			ps.setDate(30, new Date(createDate(sociModel.getDataDiNascita())));
 			ps.setString(31, sociModel.getLuogoDiNascita());
 			ps.setInt(32, sociModel.getIdTipoSocieta());
 			ps.setInt(33, sociModel.getIdQualitaTitolare());
 			ps.setString(34, sociModel.getCciaa());
 			ps.setString(35, sociModel.getRea());
-			ps.setDate(36, new Date(sociModel.getDataCostituzione().getTime()));
-			ps.setDate(37, new Date(sociModel.getDataAttivita().getTime()));
+			ps.setDate(36, new Date(createDate(sociModel.getDataCostituzione())));
+			ps.setDate(37, new Date(createDate(sociModel.getDataAttivita())));
 			ps.setString(38, sociModel.getNumeroDipendenti());
 			ps.setString(39, sociModel.getCodiceFiscaleTitolare());
 			ps.setInt(40, sociModel.getIdSettoreImpresa());
@@ -728,6 +728,10 @@ public class DefaultSociDAO implements SociDAO {
 			}
 		}
 	}
-
+	private Long createDate(java.util.Date date) {
+		if (date!=null)
+			return date.getTime();
+		return null;
+	}
 
 }
