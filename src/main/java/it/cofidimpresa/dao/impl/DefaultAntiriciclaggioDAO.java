@@ -50,7 +50,7 @@ public class DefaultAntiriciclaggioDAO implements AntiriciclaggioDAO {
 			ps.setString(5, antModel.getDataScadenza());
 			ps.setString(6, antModel.getLuogoRilascio());
 			ps.setString(7, antModel.getAutoritaCompetente());
-			ps.setDate(8, (Date) antModel.getDataInserimento());
+			ps.setDate(8, new Date(antModel.getDataInserimento().getTime()) );
 			ps.setInt(9, antModel.getIdFinanziamento());
 			ps.setString(10, antModel.getNominativo());
 			ps.setInt(11, antModel.getNumeroProgressivo());

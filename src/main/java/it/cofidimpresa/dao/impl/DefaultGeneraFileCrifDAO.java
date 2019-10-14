@@ -44,7 +44,7 @@ public class DefaultGeneraFileCrifDAO implements GeneraFileCrifDAO{
 		try {
 			conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setDate(1, (Date) dataRiferimentoCrif);
+			ps.setDate(1, new Date(dataRiferimentoCrif.getTime()));
 			
 			logger.debug("*** Query ***");
 			logger.debug(ps);
@@ -110,8 +110,8 @@ public class DefaultGeneraFileCrifDAO implements GeneraFileCrifDAO{
 		try {
 			conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setDate(1, (Date) dateStart);
-			ps.setDate(2, (Date) dataEnd);
+			ps.setDate(1, new Date(dateStart.getTime()));
+			ps.setDate(2, new Date(dataEnd.getTime()));
 			
 			logger.debug("*** Query ***");
 			logger.debug(ps);
