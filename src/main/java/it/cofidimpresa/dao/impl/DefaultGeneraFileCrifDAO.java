@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -46,7 +47,7 @@ public class DefaultGeneraFileCrifDAO implements GeneraFileCrifDAO{
 			conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
 			if(dataRiferimentoCrif!=null) {
-				ps.setDate(1, new Date(createDate(dataRiferimentoCrif)));
+				ps.setDate(1, new Date(createDate(dataRiferimentoCrif)),Calendar.getInstance());
 			}else {
 				ps.setNull(1, java.sql.Types.DATE);
 			}
@@ -116,12 +117,12 @@ public class DefaultGeneraFileCrifDAO implements GeneraFileCrifDAO{
 			conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
 			if (dateStart != null) {
-				ps.setDate(1, new Date(createDate(dateStart)));
+				ps.setDate(1, new Date(createDate(dateStart)),Calendar.getInstance());
 			} else {
 				ps.setNull(1, java.sql.Types.DATE);
 			}
 			if(dataEnd!=null) {
-				ps.setDate(2, new Date(createDate(dataEnd)));
+				ps.setDate(2, new Date(createDate(dataEnd)),Calendar.getInstance());
 			}else {
 				ps.setNull(2, java.sql.Types.DATE);
 			}

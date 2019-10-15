@@ -19,14 +19,14 @@ public class ModFinanziamentiValidator  implements Validator{
 	     ValidationUtils.rejectIfEmpty(errors, "importoGaranzia", "error.field.required.finanziamenti");	     
 	     ValidationUtils.rejectIfEmpty(errors, "rateRichieste", "error.field.required.finanziamenti");
 	    
-	     ValidationUtils.rejectIfEmpty(errors, "importo", "error.field.required.finanziamenti");
-	     ValidationUtils.rejectIfEmpty(errors, "rate", "error.field.required.finanziamenti");
-	     ValidationUtils.rejectIfEmpty(errors, "importoRata", "error.field.required.finanziamenti");
-	     ValidationUtils.rejectIfEmpty(errors, "dataErogazioneFinanziamento", "error.field.required.finanziamenti");
-	     ValidationUtils.rejectIfEmpty(errors, "dataFineFinanziamento", "error.field.required.finanziamenti");	     
-	     ValidationUtils.rejectIfEmpty(errors, "accredito", "error.field.required.finanziamenti");	     
-	     ValidationUtils.rejectIfEmpty(errors, "impQuotaBanca", "error.field.required.finanziamenti");
-	     ValidationUtils.rejectIfEmpty(errors, "istruttoriaBanca", "error.field.required.finanziamenti");
+	     //ValidationUtils.rejectIfEmpty(errors, "importo", "error.field.required.finanziamenti");
+	     //ValidationUtils.rejectIfEmpty(errors, "rate", "error.field.required.finanziamenti");
+	     //ValidationUtils.rejectIfEmpty(errors, "importoRata", "error.field.required.finanziamenti");
+	     //ValidationUtils.rejectIfEmpty(errors, "dataErogazioneFinanziamento", "error.field.required.finanziamenti");
+	     //ValidationUtils.rejectIfEmpty(errors, "dataFineFinanziamento", "error.field.required.finanziamenti");	     
+	     //ValidationUtils.rejectIfEmpty(errors, "accredito", "error.field.required.finanziamenti");	     
+	     //ValidationUtils.rejectIfEmpty(errors, "impQuotaBanca", "error.field.required.finanziamenti");
+	     //ValidationUtils.rejectIfEmpty(errors, "istruttoriaBanca", "error.field.required.finanziamenti");
 		
 	}
 

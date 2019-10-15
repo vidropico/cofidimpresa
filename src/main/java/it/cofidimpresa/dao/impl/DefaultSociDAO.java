@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -330,12 +331,12 @@ public class DefaultSociDAO implements SociDAO {
 			ps.setString(17, sociModel.getEmail());
 			ps.setInt(18, sociModel.getIdUtente());
 			if (sociModel.getDataInizio() != null) {
-				ps.setDate(19, new Date(createDate(sociModel.getDataInizio())));
+				ps.setDate(19, new Date(createDate(sociModel.getDataInizio())),Calendar.getInstance());
 			} else {
 				ps.setNull(19, java.sql.Types.DATE);
 			}
 			if (sociModel.getDataCessazione() != null) {
-				ps.setDate(20, new Date(createDate(sociModel.getDataCessazione())));
+				ps.setDate(20, new Date(createDate(sociModel.getDataCessazione())),Calendar.getInstance());
 			} else {
 				ps.setNull(20, java.sql.Types.DATE);
 			}
@@ -349,7 +350,7 @@ public class DefaultSociDAO implements SociDAO {
 			ps.setString(28, sociModel.getProvinciaSedeLegale());
 			ps.setString(29, sociModel.getTipologiaMerceologica());
 			if (sociModel.getDataDiNascita() != null) {
-				ps.setDate(30, new Date(createDate(sociModel.getDataDiNascita())));
+				ps.setDate(30, new Date(createDate(sociModel.getDataDiNascita())),Calendar.getInstance());
 			} else {
 				ps.setNull(30, java.sql.Types.DATE);
 			}
@@ -359,12 +360,12 @@ public class DefaultSociDAO implements SociDAO {
 			ps.setString(34, sociModel.getCciaa());
 			ps.setString(35, sociModel.getRea());
 			if (sociModel.getDataCostituzione() != null) {
-				ps.setDate(36, new Date(createDate(sociModel.getDataCostituzione())));
+				ps.setDate(36, new Date(createDate(sociModel.getDataCostituzione())),Calendar.getInstance());
 			} else {
 				ps.setNull(36, java.sql.Types.DATE);
 			}
 			if (sociModel.getDataAttivita() != null) {
-				ps.setDate(37, new Date(createDate(sociModel.getDataAttivita())));
+				ps.setDate(37, new Date(createDate(sociModel.getDataAttivita())),Calendar.getInstance());
 			} else {
 				ps.setNull(37, java.sql.Types.DATE);
 			}
@@ -548,12 +549,12 @@ public class DefaultSociDAO implements SociDAO {
 			ps.setString(17, sociModel.getEmail());
 			ps.setInt(18, sociModel.getIdUtente());
 			if (sociModel.getDataInizio() != null) {
-				ps.setDate(19, new Date(createDate(sociModel.getDataInizio())));
+				ps.setDate(19, new Date(createDate(sociModel.getDataInizio())),Calendar.getInstance());
 			} else {
 				ps.setNull(19, java.sql.Types.DATE);
 			}
 			if (sociModel.getDataCessazione() != null) {
-				ps.setDate(20, new Date(createDate(sociModel.getDataCessazione())));
+				ps.setDate(20, new Date(createDate(sociModel.getDataCessazione())),Calendar.getInstance());
 			} else {
 				ps.setNull(20, java.sql.Types.DATE);
 			}
@@ -567,7 +568,7 @@ public class DefaultSociDAO implements SociDAO {
 			ps.setString(28, sociModel.getProvinciaSedeLegale());
 			ps.setString(29, sociModel.getTipologiaMerceologica());
 			if (sociModel.getDataDiNascita() != null) {
-				ps.setDate(30, new Date(createDate(sociModel.getDataDiNascita())));
+				ps.setDate(30, new Date(createDate(sociModel.getDataDiNascita())),Calendar.getInstance());
 			} else {
 				ps.setNull(30, java.sql.Types.DATE);
 			}
@@ -577,12 +578,12 @@ public class DefaultSociDAO implements SociDAO {
 			ps.setString(34, sociModel.getCciaa());
 			ps.setString(35, sociModel.getRea());
 			if (sociModel.getDataCostituzione() != null) {
-				ps.setDate(36, new Date(createDate(sociModel.getDataCostituzione())));
+				ps.setDate(36, new Date(createDate(sociModel.getDataCostituzione())),Calendar.getInstance());
 			} else {
 				ps.setNull(36, java.sql.Types.DATE);
 			}
 			if (sociModel.getDataAttivita() != null) {
-				ps.setDate(37, new Date(createDate(sociModel.getDataAttivita())));
+				ps.setDate(37, new Date(createDate(sociModel.getDataAttivita())),Calendar.getInstance());
 			} else {
 				ps.setNull(37, java.sql.Types.DATE);
 			}

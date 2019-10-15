@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -335,12 +336,12 @@ public class DefaultFinanziamentiDAO implements FinanziamentiDAO {
 			ps.setString(1, fin.getImporto());
 			ps.setString(2, fin.getRate());
 			if (fin.getDataApprovazioneConsiglio() != null) {
-				ps.setDate(3, new Date(createDate(fin.getDataApprovazioneConsiglio())));
+				ps.setDate(3, new Date(createDate(fin.getDataApprovazioneConsiglio())),Calendar.getInstance());
 			} else {
 				ps.setNull(3, java.sql.Types.DATE);
 			}
 			if(fin.getDataErogazioneFinanziamento()!=null) {
-			ps.setDate(4, new Date(createDate(fin.getDataErogazioneFinanziamento())));
+			ps.setDate(4, new Date(createDate(fin.getDataErogazioneFinanziamento())),Calendar.getInstance());
 			}else {
 				ps.setNull(4, java.sql.Types.DATE);
 			}
@@ -362,7 +363,7 @@ public class DefaultFinanziamentiDAO implements FinanziamentiDAO {
 			ps.setString(20, fin.getAzioni());
 			ps.setString(21, fin.getRisultato());
 			if(fin.getDataFineFinanziamento()!=null) {
-				ps.setDate(22, new Date(createDate(fin.getDataFineFinanziamento())));
+				ps.setDate(22, new Date(createDate(fin.getDataFineFinanziamento())),Calendar.getInstance());
 			}else {
 				ps.setNull(22, java.sql.Types.DATE);
 			}
@@ -424,12 +425,12 @@ public class DefaultFinanziamentiDAO implements FinanziamentiDAO {
 			ps.setString(1, fin.getImporto());
 			ps.setString(2, fin.getRate());
 			if (fin.getDataApprovazioneConsiglio() != null) {
-				ps.setDate(3, new Date(createDate(fin.getDataApprovazioneConsiglio())));
+				ps.setDate(3, new Date(createDate(fin.getDataApprovazioneConsiglio())),Calendar.getInstance());
 			} else {
 				ps.setNull(3, java.sql.Types.DATE);
 			}
 			if(fin.getDataErogazioneFinanziamento()!=null) {
-			ps.setDate(4, new Date(createDate(fin.getDataErogazioneFinanziamento())));
+			ps.setDate(4, new Date(createDate(fin.getDataErogazioneFinanziamento())),Calendar.getInstance());
 			}else {
 				ps.setNull(4, java.sql.Types.DATE);
 			}
@@ -451,7 +452,7 @@ public class DefaultFinanziamentiDAO implements FinanziamentiDAO {
 			ps.setString(20, fin.getAzioni());
 			ps.setString(21, fin.getRisultato());
 			if(fin.getDataFineFinanziamento()!=null) {
-				ps.setDate(22, new Date(createDate(fin.getDataFineFinanziamento())));
+				ps.setDate(22, new Date(createDate(fin.getDataFineFinanziamento())),Calendar.getInstance());
 			}else {
 				ps.setNull(22, java.sql.Types.DATE);
 			}

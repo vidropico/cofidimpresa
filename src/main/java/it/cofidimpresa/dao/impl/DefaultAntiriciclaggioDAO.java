@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -51,7 +52,7 @@ public class DefaultAntiriciclaggioDAO implements AntiriciclaggioDAO {
 			ps.setString(6, antModel.getLuogoRilascio());
 			ps.setString(7, antModel.getAutoritaCompetente());
 			if(antModel.getDataInserimento()!=null) {
-				ps.setDate(8, new Date(createDate(antModel.getDataInserimento())));
+				ps.setDate(8, new Date(createDate(antModel.getDataInserimento())),Calendar.getInstance());
 			}else {
 				ps.setNull(8, java.sql.Types.DATE);
 			}
