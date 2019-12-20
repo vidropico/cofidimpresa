@@ -39,6 +39,7 @@
 					<th>ACCREDITI</th>
 					<th>ISCRIZIONE</th>
 					<th>QUOTA ASS</th>
+					<th>CODICE UNIVOCO</th>
 					<th>PREVENZIONE USURA</th>
 				</tr>
 			</thead>
@@ -63,6 +64,7 @@
 						<td>${tableExcelData.costi}</td>
 						<td>${tableExcelData.costoIstruttoria}</td>
 						<td>${tableExcelData.importoQuote}</td>
+						<td>${tableExcelData.codiceUnivoco}</td>
 						<td>${tableExcelData.flgUsura}</td>
 					</tr>
 				</c:forEach>

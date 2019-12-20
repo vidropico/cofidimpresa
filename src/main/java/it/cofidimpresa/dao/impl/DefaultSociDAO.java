@@ -128,6 +128,7 @@ public class DefaultSociDAO implements SociDAO {
 				soci.setMobile(rs.getString("MOBILE"));
 				soci.setEmail(rs.getString("EMAIL"));
 				soci.setTipologiaMerceologica(rs.getString("TIPOLOGIA_MERCEOLOGICA"));
+				soci.setCodiceUnivoco(rs.getString("CODICE_UNIVOCO"));
 				soci.setLuogoDiNascita(rs.getString("LUOGO_DI_NASCITA"));
 				soci.setCciaa(rs.getString("CCIAA"));
 				soci.setRea(rs.getString("REA"));

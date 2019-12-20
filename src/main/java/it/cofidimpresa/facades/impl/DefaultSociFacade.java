@@ -69,6 +69,7 @@ public class DefaultSociFacade implements SociFacade {
 			sociTableData.setIndirizzoAzienda(sociModel.getIndirizzoAzienda() + " " + sociModel.getCittaAzienda());
 			sociTableData.setpIva(sociModel.getPartitaIva());
 			sociTableData.setTipologiaMerceologica(sociModel.getTipologiaMerceologica());
+			sociTableData.setCodiceUnivoco(sociModel.getCodiceUnivoco());
 			sociTableData.setStato(statoSocioFacade.getStatoSocio(sociModel.getIdStatoSocio()));
 			sociTableData.setFinanziamentiNum(
 					Integer.toString(finanziamentiFacade.getNumFinanziamentiSocio(sociModel.getIdSoci())));

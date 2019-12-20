@@ -10,6 +10,7 @@ public class SociTableData {
 	private String pIva;
 	private String indirizzoAzienda;
 	private String tipologiaMerceologica;
+	private String codiceUnivoco;
 	private String stato;
 	private String email;
 	private Date dataInizio;
@@ -93,6 +94,14 @@ public class SociTableData {
 
 	public void setTipologiaMerceologica(String tipologiaMerceologica) {
 		this.tipologiaMerceologica = tipologiaMerceologica;
+	}
+
+	public String getCodiceUnivoco() {
+		return codiceUnivoco;
+	}
+
+	public void setCodiceUnivoco(String codiceUnivoco) {
+		this.codiceUnivoco = codiceUnivoco;
 	}
 
 }
