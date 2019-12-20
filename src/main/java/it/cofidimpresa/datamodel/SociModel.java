@@ -50,6 +50,7 @@ public class SociModel {
 	private int idStatoSocio;
 	private int antiriciclaggio;
 	private String cognome;
+	private String codiceUnivoco;
 
 	public int getIdSoci() {
 		return idSoci;
@@ -417,6 +418,14 @@ public class SociModel {
 
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
+	}
+
+	public String getCodiceUnivoco() {
+		return codiceUnivoco;
+	}
+
+	public void setCodiceUnivoco(String codiceUnivoco) {
+		this.codiceUnivoco = codiceUnivoco;
 	}
 
 }

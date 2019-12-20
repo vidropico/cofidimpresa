@@ -214,6 +214,7 @@ public class DefaultSociFacade implements SociFacade {
 		if (socio.getIdSoci() > 0) {
 			sociModel.setIdSoci(socio.getIdSoci());
 		}
+		sociModel.setCodiceUnivoco(socio.getCodiceUnivoco());
 	}
 
 	private void converterModelToData(SociModel socioModel, SociData socio) throws ParseException {
@@ -276,6 +277,7 @@ public class DefaultSociFacade implements SociFacade {
 		if (socioModel.getIdSoci() > 0) {
 			socio.setIdSoci(socioModel.getIdSoci());
 		}
+		socio.setCodiceUnivoco(socioModel.getCodiceUnivoco());
 
 	}
 

@@ -295,13 +295,13 @@ public class DefaultSociDAO implements SociDAO {
 				+ "PROVINCIA_RESIDENZA, TELEFONO, FAX, MOBILE, EMAIL,"
 				+ "ID_UTENTE, DATA_INIZIO, DATA_CESSAZIONE, INDIRIZZO_SEDE_OPERATIVA,"
 				+ "CITTA_SEDE_OPERATIVA, CAP_SEDE_OPERATIVA, PROVINCIA_SEDE_OPERATIVA,"
-				+ "INDIRIZZO_SEDE_LEGALE, CITTA_SEDE_LEGALE," + "CAP_SEDE_LEGALE, PROVINCIA_SEDE_LEGALE,"
+				+ "INDIRIZZO_SEDE_LEGALE, CITTA_SEDE_LEGALE,CAP_SEDE_LEGALE, PROVINCIA_SEDE_LEGALE,"
 				+ "TIPOLOGIA_MERCEOLOGICA, DATA_DI_NASCITA, LUOGO_DI_NASCITA,"
 				+ "ID_TIPO_SOCIETA, ID_QUALITA_TITOLARE, CCIAA,"
 				+ "REA, DATA_COSTITUZIONE, DATA_ATTIVITA, NUMERO_DIPENDENTI,"
 				+ "CODICE_FISCALE_TITOLARE, ID_SETTORE_IMPRESA, ID_STATO_SOCIO,"
-				+ "NLIBRO_SOCI,NUMERO_QUOTE,IMPORTO_QUOTE) VALUES ("
-				+ "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?" + ")";
+				+ "NLIBRO_SOCI,NUMERO_QUOTE,IMPORTO_QUOTE,CODICE_UNIVOCO) VALUES ("
+				+ "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		Connection conn = null;
 
@@ -376,29 +376,12 @@ public class DefaultSociDAO implements SociDAO {
 			ps.setInt(42, sociModel.getNumeroLibroSoci());
 			ps.setInt(43, sociModel.getNumeroQuote());
 			ps.setDouble(44, sociModel.getImportoQuote());
+			ps.setString(45, sociModel.getCodiceUnivoco());
 			// ps.setInt(45, null);
 
 			logger.debug("Parameter");
-			logger.debug(sociModel.getNome() + "," + sociModel.getCognome() + "," + sociModel.getImpresa() + ","
-					+ sociModel.getCodiceFiscale() + "," + sociModel.getPartitaIva() + ","
-					+ sociModel.getIndirizzoAzienda() + "," + sociModel.getCittaAzienda() + ","
-					+ sociModel.getCapAzienda() + "," + sociModel.getProvinciaAzienda() + ","
-					+ sociModel.getIndirizzoResidenza() + "," + sociModel.getCittaResidenza() + ","
-					+ sociModel.getCapResidenza() + "," + sociModel.getProvinciaResidenza() + ","
-					+ sociModel.getTelefono() + "," + sociModel.getFax() + "," + sociModel.getMobile() + ","
-					+ sociModel.getEmail() + "," + sociModel.getIdUtente() + "," + sociModel.getDataInizio() + ","
-					+ sociModel.getDataCessazione() + "," + sociModel.getIndirizzoSedeOperativa() + ","
-					+ sociModel.getCittaSedeOperativa() + "," + sociModel.getCapSedeOperativa() + ","
-					+ sociModel.getProvinciaSedeOperativa() + "," + sociModel.getIndirizzoSedeLegale() + ","
-					+ sociModel.getCittaSedeLegale() + "," + sociModel.getCapSedeLegale() + ","
-					+ sociModel.getProvinciaSedeLegale() + "," + sociModel.getTipologiaMerceologica() + ","
-					+ sociModel.getDataDiNascita() + "," + sociModel.getLuogoDiNascita() + ","
-					+ sociModel.getIdTipoSocieta() + "," + sociModel.getIdQualitaTitolare() + "," + sociModel.getCciaa()
-					+ "," + sociModel.getRea() + "," + sociModel.getDataCostituzione() + ","
-					+ sociModel.getDataAttivita() + "," + sociModel.getNumeroDipendenti() + ","
-					+ sociModel.getCodiceFiscaleTitolare() + "," + sociModel.getIdSettoreImpresa() + ","
-					+ sociModel.getIdStatoSocio() + "," + sociModel.getNumeroLibroSoci() + ","
-					+ sociModel.getNumeroQuote() + "," + sociModel.getImportoQuote());
+			logger.debug(ps.getParameterMetaData());
+			
 			ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
 			Integer idSocio = -1;
@@ -507,18 +490,18 @@ public class DefaultSociDAO implements SociDAO {
 
 	public Integer updateSocio(SociModel sociModel) {
 		logger.debug("*** Start updateSocio ***");
-		String sql = "UPDATE soci SET " + "NOME = ?," + "COGNOME = ?," + "IMPRESA = ?," + "CODICE_FISCALE = ?,"
-				+ "PARTITA_IVA = ?, " + "INDIRIZZO_AZIENDA = ?," + "CITTA_AZIENDA = ?," + "CAP_AZIENDA = ?,"
-				+ "PROVINCIA_AZIENDA = ?," + "INDIRIZZO_RESIDENZA = ?," + "CITTA_RESIDENZA = ?," + "CAP_RESIDENZA = ?,"
-				+ "PROVINCIA_RESIDENZA = ?," + "TELEFONO = ?," + "FAX = ?," + "MOBILE = ?," + "EMAIL = ?,"
-				+ "ID_UTENTE= ?," + "DATA_INIZIO = ?," + "DATA_CESSAZIONE = ?," + "INDIRIZZO_SEDE_OPERATIVA = ?,"
-				+ "CITTA_SEDE_OPERATIVA = ?," + "CAP_SEDE_OPERATIVA = ?," + "PROVINCIA_SEDE_OPERATIVA = ?,"
-				+ "INDIRIZZO_SEDE_LEGALE = ?," + "CITTA_SEDE_LEGALE = ?," + "CAP_SEDE_LEGALE = ?,"
-				+ "PROVINCIA_SEDE_LEGALE = ?," + "TIPOLOGIA_MERCEOLOGICA = ?," + "DATA_DI_NASCITA = ?,"
-				+ "LUOGO_DI_NASCITA = ?," + "ID_TIPO_SOCIETA = ?," + "ID_QUALITA_TITOLARE = ?," + "CCIAA = ?,"
-				+ "REA = ?," + "DATA_COSTITUZIONE = ?," + "DATA_ATTIVITA = ?," + "NUMERO_DIPENDENTI = ?,"
-				+ "CODICE_FISCALE_TITOLARE = ?," + "ID_SETTORE_IMPRESA = ?," + "ID_STATO_SOCIO = ?,"
-				+ "NLIBRO_SOCI = ?," + "NUMERO_QUOTE = ?," + "IMPORTO_QUOTE = ?," + "ANTIRICICLAGGIO = ?"
+		String sql = "UPDATE soci SET NOME = ?,COGNOME = ?,IMPRESA = ?,CODICE_FISCALE = ?,"
+				+ "PARTITA_IVA = ?, INDIRIZZO_AZIENDA = ?,CITTA_AZIENDA = ?,CAP_AZIENDA = ?,"
+				+ "PROVINCIA_AZIENDA = ?,INDIRIZZO_RESIDENZA = ?,CITTA_RESIDENZA = ?,CAP_RESIDENZA = ?,"
+				+ "PROVINCIA_RESIDENZA = ?,TELEFONO = ?,FAX = ?,MOBILE = ?,EMAIL = ?,"
+				+ "ID_UTENTE= ?,DATA_INIZIO = ?,DATA_CESSAZIONE = ?,INDIRIZZO_SEDE_OPERATIVA = ?,"
+				+ "CITTA_SEDE_OPERATIVA = ?,CAP_SEDE_OPERATIVA = ?,PROVINCIA_SEDE_OPERATIVA = ?,"
+				+ "INDIRIZZO_SEDE_LEGALE = ?,CITTA_SEDE_LEGALE = ?,CAP_SEDE_LEGALE = ?,"
+				+ "PROVINCIA_SEDE_LEGALE = ?,TIPOLOGIA_MERCEOLOGICA = ?,DATA_DI_NASCITA = ?,"
+				+ "LUOGO_DI_NASCITA = ?,ID_TIPO_SOCIETA = ?,ID_QUALITA_TITOLARE = ?,CCIAA = ?,"
+				+ "REA = ?,DATA_COSTITUZIONE = ?,DATA_ATTIVITA = ?,NUMERO_DIPENDENTI = ?,"
+				+ "CODICE_FISCALE_TITOLARE = ?,ID_SETTORE_IMPRESA = ?,ID_STATO_SOCIO = ?,"
+				+ "NLIBRO_SOCI = ?,NUMERO_QUOTE = ?,IMPORTO_QUOTE = ?,ANTIRICICLAGGIO = ?,CODICE_UNIVOCO=?"
 				+ " WHERE ID_SOCI =?";
 
 		Connection conn = null;
@@ -595,30 +578,11 @@ public class DefaultSociDAO implements SociDAO {
 			ps.setInt(43, sociModel.getNumeroQuote());
 			ps.setDouble(44, sociModel.getImportoQuote());
 			ps.setInt(45, sociModel.getAntiriciclaggio());
-			ps.setInt(46, sociModel.getIdSoci());
+			ps.setString(46, sociModel.getCodiceUnivoco());
+			ps.setInt(47, sociModel.getIdSoci());
 
 			logger.debug("Parameter");
-			logger.debug(sociModel.getNome() + "," + sociModel.getCognome() + "," + sociModel.getImpresa() + ","
-					+ sociModel.getCodiceFiscale() + "," + sociModel.getPartitaIva() + ","
-					+ sociModel.getIndirizzoAzienda() + "," + sociModel.getCittaAzienda() + ","
-					+ sociModel.getCapAzienda() + "," + sociModel.getProvinciaAzienda() + ","
-					+ sociModel.getIndirizzoResidenza() + "," + sociModel.getCittaResidenza() + ","
-					+ sociModel.getCapResidenza() + "," + sociModel.getProvinciaResidenza() + ","
-					+ sociModel.getTelefono() + "," + sociModel.getFax() + "," + sociModel.getMobile() + ","
-					+ sociModel.getEmail() + "," + sociModel.getIdUtente() + "," + sociModel.getDataInizio() + ","
-					+ sociModel.getDataCessazione() + "," + sociModel.getIndirizzoSedeOperativa() + ","
-					+ sociModel.getCittaSedeOperativa() + "," + sociModel.getCapSedeOperativa() + ","
-					+ sociModel.getProvinciaSedeOperativa() + "," + sociModel.getIndirizzoSedeLegale() + ","
-					+ sociModel.getCittaSedeLegale() + "," + sociModel.getCapSedeLegale() + ","
-					+ sociModel.getProvinciaSedeLegale() + "," + sociModel.getTipologiaMerceologica() + ","
-					+ sociModel.getDataDiNascita() + "," + sociModel.getLuogoDiNascita() + ","
-					+ sociModel.getIdTipoSocieta() + "," + sociModel.getIdQualitaTitolare() + "," + sociModel.getCciaa()
-					+ "," + sociModel.getRea() + "," + sociModel.getDataCostituzione() + ","
-					+ sociModel.getDataAttivita() + "," + sociModel.getNumeroDipendenti() + ","
-					+ sociModel.getCodiceFiscaleTitolare() + "," + sociModel.getIdSettoreImpresa() + ","
-					+ sociModel.getIdStatoSocio() + "," + sociModel.getNumeroLibroSoci() + ","
-					+ sociModel.getNumeroQuote() + "," + sociModel.getImportoQuote() + ","
-					+ sociModel.getAntiriciclaggio() + "," + sociModel.getIdSoci());
+			logger.debug(ps.getParameterMetaData());
 
 			logger.debug("*** Prepared Statement ***");
 			logger.debug(ps);

@@ -15,6 +15,7 @@ public class TableExcelData {
 	private String codiceFiscale;
 	private String partitaIva;
 	private String tipologiaMerceologica;
+	private String codiceUnivoco;
 	private String cognome;
 	private String importoQuote;
 	private String rate;
@@ -101,6 +102,12 @@ public class TableExcelData {
 	 */
 	public void setTipologiaMerceologica(String tipologiaMerceologica) {
 		this.tipologiaMerceologica = tipologiaMerceologica;
+	}
+	public String getCodiceUnivoco() {
+		return codiceUnivoco;
+	}
+	public void setCodiceUnivoco(String codiceUnivoco) {
+		this.codiceUnivoco = codiceUnivoco;
 	}
 	/**
 	 * @return the cognome
