@@ -96,7 +96,7 @@ public class DefaultGeneraFileCrifDAO implements GeneraFileCrifDAO{
 	public List<TableExcelData> getReportExcel(Date dateStart, Date dataEnd) {
 		logger.debug("*** Start getReportExcel ***");
 		String sql = "SELECT SOCI.NOME, SOCI.COGNOME, SOCI.IMPRESA, SOCI.CODICE_FISCALE," + 
-				"SOCI.PARTITA_IVA, SOCI.TIPOLOGIA_MERCEOLOGICA," + 
+				"SOCI.PARTITA_IVA, SOCI.TIPOLOGIA_MERCEOLOGICA, SOCI.CODICE_UNIVOCO" + 
 				"FINANZIAMENTI.DATA_APPROVAZIONE_CONSIGLIO, FINANZIAMENTI.IMPORTO_DELIBERATO," + 
 				"FINANZIAMENTI.DATA_EROGAZIONE_FINANZIAMENTO, FINANZIAMENTI.DATA_FINE_FINANZIAMENTO,"+
 				"FINANZIAMENTI.IMPORTO," + "FINANZIAMENTI.FLG_USURA," + 
@@ -144,6 +144,7 @@ public class DefaultGeneraFileCrifDAO implements GeneraFileCrifDAO{
 				tableExcelData.setImpresa(rs.getString("IMPRESA"));
 				tableExcelData.setImportoQuote(rs.getString("IMP_QUOTE_BANCA"));
 				tableExcelData.setTipologiaMerceologica(rs.getString("TIPOLOGIA_MERCEOLOGICA"));
+				tableExcelData.setTipologiaMerceologica(rs.getString("CODICE_UNIVOCO"));
 				tableExcelData.setDataApprovazioneConsiglio(rs.getString("DATA_APPROVAZIONE_CONSIGLIO"));
 				tableExcelData.setImportoDeliberato(rs.getInt("IMPORTO_DELIBERATO"));
 				tableExcelData.setDataErogazioneFinanziamento(rs.getString("DATA_EROGAZIONE_FINANZIAMENTO"));

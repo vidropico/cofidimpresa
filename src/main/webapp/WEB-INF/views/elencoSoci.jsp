@@ -22,6 +22,7 @@
 					<th>E-MAIL</th>
 					<th>DATA INIZIO</th>
 					<th>NUM. FINANZIAMENTI</th>
+					<th>CODICE UNIVOCO</th>
 					<th>AZIONI</th>
 				</tr>
 			</thead>
@@ -37,6 +38,7 @@
 						<td>${socioData.email}</td>
 						<td>${socioData.dataInizio}</td>
 						<td>${socioData.finanziamentiNum}</td>
+						<td>${socioData.codiceUnivoco}</td>
 						<td><a href="modificaSocio?idSocio=${socioData.idSocio}">
 								<img title="Modifica Socio" src="images/icons/modifica.png"
 								alt="Modifica Socio" height="25px" width="25px">

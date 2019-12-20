@@ -51,6 +51,7 @@ public class SociData {
 	private int idStatoSocio;
 	private int antiriciclaggio;
 	private String cognome;
+	private String codiceUnivoco;
 	private List<Integer> idAteco;
 	
 	public int getIdSoci() {
@@ -334,6 +335,12 @@ public class SociData {
 	}
 	public void setIdAteco(List<Integer> idAteco) {
 		this.idAteco = idAteco;
+	}
+	public String getCodiceUnivoco() {
+		return codiceUnivoco;
+	}
+	public void setCodiceUnivoco(String codiceUnivoco) {
+		this.codiceUnivoco = codiceUnivoco;
 	}
 
 }
