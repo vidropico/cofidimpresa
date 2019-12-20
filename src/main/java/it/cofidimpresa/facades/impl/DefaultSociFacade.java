@@ -107,7 +107,9 @@ public class DefaultSociFacade implements SociFacade {
 		if (!CollectionUtils.isEmpty(socio.getIdAteco())) {
 			if (idSocio.intValue() > 0) {
 				for (Integer idAteco : socio.getIdAteco()) {
-					sociDAO.addSocioAteco(idAteco.intValue(), idSocio.intValue());
+					if(idAteco != null) {
+						sociDAO.addSocioAteco(idAteco.intValue(), idSocio.intValue());
+					}
 				}
 			}else {
 				logger.info("Id socio per inserimento Ateco non presente");
