@@ -16,4 +16,6 @@ public interface AntiriciclaggioFacade {
 	public List<AntiriciclaggioData> getAntiriciclaggioByIdFin(Integer idFin);
 	
 	public List<AntiriciclaggioData> elecoAntiriciclaggio();
+	
+	public List<AntiriciclaggioData> elecoAntiriciclaggio(String anno);
 }

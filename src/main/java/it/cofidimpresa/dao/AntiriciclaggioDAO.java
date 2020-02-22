@@ -18,4 +18,6 @@ public interface AntiriciclaggioDAO {
 	public List<AntiriciclaggioModel> getAntiriciclaggioByIdFin(Integer idFin);
 	
 	public List<AntiriciclaggioModel> elencoAntiriciclaggio();
+	
+	public List<AntiriciclaggioModel> elencoAntiriciclaggio(String anno);
 }

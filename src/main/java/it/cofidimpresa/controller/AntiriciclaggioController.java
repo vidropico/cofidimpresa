@@ -117,4 +117,31 @@ public class AntiriciclaggioController {
 		return "elencoAntiriciclaggio";
 	}
 	
+	@RequestMapping(value = "/estraiElencoAntiriciclaggio", method = RequestMethod.GET)
+	public String getEstraiElencoAntiriciclaggio(final Model model,
+			@RequestParam("idAnt") Integer idAnt,
+			final HttpServletRequest request, final HttpServletResponse response) {
+		logger.debug("*** estraiElencoAntiriciclaggio ***");
+		String anno="";
+		model.addAttribute("selectAnno", anno);	
+		return "modAntiriciclaggio";
+	}
+	
+	@RequestMapping(value = "/estraiElencoAntiriciclaggio", method = RequestMethod.POST)
+	public String getEstraiElencoAntiriciclaggioPost(final Model model,
+			@RequestParam("selectAnno") String anno,
+			final HttpServletRequest request, final HttpServletResponse response) {
+		logger.debug("*** estraiElencoAntiriciclaggio ***");
+		
+		try {
+			List<AntiriciclaggioData> antiriciclaggioList= antiriciclaggioFacade.elecoAntiriciclaggio();
+			model.addAttribute("antiriciclaggioList", antiriciclaggioList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "modAntiriciclaggio";
+	}
+	
 }

@@ -351,6 +351,63 @@ public class DefaultAntiriciclaggioDAO implements AntiriciclaggioDAO {
 		}
 	}
 	
+	public List<AntiriciclaggioModel> elencoAntiriciclaggio(String anno) {
+		logger.debug("*** Start elencoAntiriciclaggio ***");
+
+		String sql = "SELECT * FROM antiriciclaggio WHERE ANNO_PROGRESSIVO = ? ";
+
+		Connection conn = null;
+
+		try {
+
+			conn = dataSource.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, Integer.valueOf(anno));
+
+			logger.debug("*** Query ***");
+			logger.debug(ps);
+
+			ResultSet rs = ps.executeQuery();
+
+			List<AntiriciclaggioModel> result = new ArrayList<AntiriciclaggioModel>();
+
+			while (rs.next()) {
+				AntiriciclaggioModel ant = new AntiriciclaggioModel();
+				ant.setAnnoProgressivo(rs.getInt("ANNO_PROGRESSIVO"));
+				ant.setAutoritaCompetente(rs.getString("AUTORITA_COMPETENTE"));
+				ant.setDataInserimento(rs.getDate("DATA_INSERIMENTO"));
+				ant.setDataRilascio(rs.getString("DATA_RILASCIO"));
+				ant.setDataScadenza(rs.getString("DATA_SCADENZA"));
+				ant.setFlagInsCompleto(rs.getInt("FLAG_INSCOMPLETO"));
+				ant.setFlagStampa(rs.getInt("FLAG_STAMPA"));
+				ant.setIdAntiriciclaggio(rs.getInt("ID_ANTIRICICLAGGIO"));
+				ant.setIdDocumento(rs.getString("ID_DOCUMENTO"));
+				ant.setIdFinanziamento(rs.getInt("ID_FINANZIAMENTO"));
+				ant.setIdSoci(rs.getInt("ID_SOCI"));
+				ant.setLuogoRilascio(rs.getString("LUOGO_RILASCIO"));
+				ant.setNominativo(rs.getString("NOMINATIVO"));
+				ant.setNumeroDocumento(rs.getString("NUMERO_DOCUMENTO"));
+				ant.setNumeroProgressivo(rs.getInt("NUMERO_PROGRESSIVO"));
+				result.add(ant);
+			}
+			rs.close();
+			ps.close();
+			logger.debug("*** End elencoAntiriciclaggio ***");
+			return result;
+		} catch (SQLException e) {
+			logger.error("Exception: ", e);
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
+	
 	private Long createDate(java.util.Date date) {
 		if (date!=null)
 			return date.getTime();

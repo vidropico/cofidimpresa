@@ -88,6 +88,20 @@ public class DefaultAntiriciclaggioFacade implements AntiriciclaggioFacade{
 		return resultData;
 	}
 	
+	public List<AntiriciclaggioData> elecoAntiriciclaggio(String anno) {
+		List<AntiriciclaggioData> resultData = new ArrayList<AntiriciclaggioData>();
+		List<AntiriciclaggioModel> result = new ArrayList<AntiriciclaggioModel>();
+		result = antiriciclaggioDAO.elencoAntiriciclaggio(anno);
+		for (AntiriciclaggioModel antTmpModel : result) {
+			AntiriciclaggioData antData = new AntiriciclaggioData();
+			convertModelToData(antTmpModel,antData);
+			antData.setImpresa(sociDAO.getSocioById(antTmpModel.getIdSoci()).getImpresa());
+			resultData.add(antData);
+		}
+			
+		return resultData;
+	}
+	
 	private void convertModelToData(AntiriciclaggioModel antModel, AntiriciclaggioData antData) {
 		antData.setAnnoProgressivo(antModel.getAnnoProgressivo());
 		antData.setAutoritaCompetente(antModel.getAutoritaCompetente());
